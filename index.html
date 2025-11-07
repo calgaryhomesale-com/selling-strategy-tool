@@ -136,6 +136,25 @@
             margin-left: 20px;
             color: #00897b;
         }
+        /* New Styles for Clarity */
+        .recommended-method {
+            padding: 20px;
+            border: 3px solid #00897b; /* Dark Green Border */
+            border-radius: 8px;
+            background-color: #e0f2f1; /* Light Green Background */
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            color: #004d40;
+            margin-top: 20px;
+        }
+        .not-optimal-method {
+            margin-bottom: 20px; 
+            padding: 15px; 
+            border: 1px solid #ffcc80; 
+            border-radius: 8px; 
+            background-color: #fff3e0;
+        }
     </style>
 </head>
 <body>
@@ -164,8 +183,15 @@
             </div>
         </div>
 
+        <div class="step-section" id="step-2-container" style="display: none;">
+            <h2>Step 2: What is your #2 priority?</h2>
+            <p style="color: #c00; font-weight: bold;">(You cannot choose your first priority again)</p>
+            <div class="option-group" id="priority2-options">
+                </div>
+        </div>
+
         <div class="step-section">
-            <h2>Step 2: Tell us about your property.</h2>
+            <h2>Step 3: Tell us about your property.</h2>
             <div class="option-group" style="gap: 25px;">
                 <div style="display: flex; flex-direction: column; gap: 5px;">
                     <span style="font-weight: bold;">What city is the property located in?</span>
@@ -200,7 +226,7 @@
         </div>
         
         <div class="step-section" id="market-lookup-section">
-            <h2>Step 3: Determine Your Market Condition</h2>
+            <h2>Step 4: Determine Your Market Condition</h2>
             <p>To ensure the best advice, you must check the **Months of Supply** for your property type.</p>
             
             <div id="google-prompt-display" style="
@@ -229,13 +255,6 @@
                     <span>Buyer's Market (More than 4 months of supply)</span>
                 </label>
             </div>
-        </div>
-
-        <div class="step-section" id="step-4-container" style="display: none;">
-            <h2>Step 4: What is your #2 priority?</h2>
-            <p style="color: #c00; font-weight: bold;">(You cannot choose your first priority again)</p>
-            <div class="option-group" id="priority2-options">
-                </div>
         </div>
 
         <button id="findStrategyBtn" disabled>Find My Strategy</button>
@@ -288,4 +307,247 @@
 
         // Balanced Market - RETAIL
         'speed-price-balanced-retail': { method: 'realtor', title: "Aggressive Pricing Strategy", subtitle: "Price slightly below market value to generate urgency and multiple offers.", strategy: "Traditional MLS with staging. Must be flawless and priced to move.", timeline: "14-28 days.", tradeoff: "Minimal Control/Convenience" },
-        'speed-control-balanced-retail': { method: 'cash', title: "As
+        'speed-control-balanced-retail': { method: 'cash', title: "As-Is, Quick Exit", subtitle: "Only a cash offer will guarantee speed and zero hassle in this market.", strategy: "Private cash offer from investor/iBuyer. Sell as-is.", timeline: "10-21 days.", tradeoff: "Significant Price Loss (15-20%)" },
+        'price-speed-balanced-retail': { method: 'realtor', title: "Maximize Value: Excellent Presentation", subtitle: "Flawless presentation is non-negotiable to achieve maximum value in a balanced market.", strategy: "Premium MLS listing with staging, minor repairs, and aggressive marketing.", timeline: "28-45 days.", tradeoff: "Time and Effort" },
+        'price-control-balanced-retail': { method: 'realtor', title: "Strong Price, Seller-Controlled Showings", subtitle: "List at top price but restrict showings to manage stress. This will extend the timeline.", strategy: "Traditional MLS listing with restricted showing times/days.", timeline: "45-75 days.", tradeoff: "Speed" },
+        'control-speed-balanced-retail': { method: 'cash', title: "Fastest, Easiest Sale", subtitle: "The only guaranteed way to sell fast with minimal effort is a private cash sale.", strategy: "Private cash offer. Sell as-is with guaranteed closing date.", timeline: "10-21 days.", tradeoff: "Significant Price Loss (15-20%)" },
+        'control-price-balanced-retail': { method: 'realtor', title: "Maximize Control, Fair Price", subtitle: "Use an agent for expertise but manage the showing schedule tightly. Commission is worth the saved effort.", strategy: "Traditional MLS with tightly controlled showing schedule.", timeline: "45-75 days.", tradeoff: "Speed" },
+
+        // Balanced Market - INVESTOR
+        'speed-price-balanced-investor': { method: 'cash', title: "Direct Investor Target", subtitle: "Price at the very bottom of land value to trigger a quick cash sale from a developer.", strategy: "Targeted direct outreach to developers. Price aggressively.", timeline: "10-21 days.", tradeoff: "Guaranteed Price Loss (15-20%)" },
+        'speed-control-balanced-investor': { method: 'cash', title: "As-Is, Ultra-Fast Exit", subtitle: "This is a perfect cash sale opportunity. Fastest, easiest way to move the property.", strategy: "Private cash offer. Zero effort needed on your part.", timeline: "10-21 days.", tradeoff: "Significant Price Loss (15-20%)" },
+        'price-speed-balanced-investor': { method: 'realtor', title: "Maximize Investor Value, Strategic Pricing", subtitle: "List with a specialized agent to market the opportunity correctly.", strategy: "MLS listing highlighting development/rental potential, priced at top land value.", timeline: "28-45 days.", tradeoff: "Time and Effort" },
+        'price-control-balanced-investor': { method: 'fsbo', title: "FSBO: Max Price, High Effort", subtitle: "Highly risky. You must know the investor market value perfectly to succeed and save commission.", strategy: "Self-list, targeted only at investors. Requires extreme effort and market knowledge.", timeline: "75+ days.", tradeoff: "Legal/Marketing Risk" },
+        'control-speed-balanced-investor': { method: 'cash', title: "Fastest As-Is Sale", subtitle: "The quickest, zero-hassle path is a guaranteed cash investor sale.", strategy: "Private cash offer with no contingencies and a fast close.", timeline: "10-21 days.", tradeoff: "Significant Price Loss (15-20%)" },
+        'control-price-balanced-investor': { method: 'realtor', title: "Maximize Control, Fair Investor Price", subtitle: "Agent handles marketing while you control the schedule. Recommended over risky FSBO.", strategy: "MLS listing with tightly controlled access for investor viewings.", timeline: "45-75 days.", tradeoff: "Speed" },
+
+        // Buyer's Market - RETAIL
+        'speed-price-buyer-retail': { method: 'realtor', title: "Aggressive Concessions Strategy", subtitle: "Price well below market (8-12% lower) and offer buyer incentives to trigger speed.", strategy: "Traditional MLS with massive price reduction and incentives (rate buydowns, closing costs).", timeline: "45-75 days.", tradeoff: "Significant Price Loss (Necessary)" },
+        'speed-control-buyer-retail': { method: 'cash', title: "As-Is, Guaranteed Exit", subtitle: "The only way to guarantee speed and zero hassle is a private cash sale in this market.", strategy: "Private cash offer. Sell as-is with minimal negotiation.", timeline: "14-28 days.", tradeoff: "Major Price Loss (20-30%)" },
+        'price-speed-buyer-retail': { method: 'realtor', title: "Maximize Value: Long Term View", subtitle: "Achieving top price requires a long timeline, extreme staging, and immaculate condition.", strategy: "Premium MLS listing. Must be significantly better than all competition to sell at top value.", timeline: "75+ days.", tradeoff: "Extreme Time Commitment" },
+        'price-control-buyer-retail': { method: 'realtor', title: "Price Focus: Consider Waiting", subtitle: "If you want maximum price and low effort, your best move is waiting for market recovery.", strategy: "Delay sale 6-12 months or consider renting the property in the interim.", timeline: "6-12+ months.", tradeoff: "Speed" },
+        'control-speed-buyer-retail': { method: 'cash', title: "Easiest Guaranteed Exit", subtitle: "Sell to an investor for the fastest, lowest-stress process. A strong recommendation.", strategy: "Private cash offer, sell as-is with quick close and no showings.", timeline: "14-28 days.", tradeoff: "Major Price Loss (20-30%)" },
+        'control-price-buyer-retail': { method: 'realtor', title: "Maximize Control: Wait or Rent", subtitle: "Avoid listing now. This market will require heavy effort or steep price cuts to sell.", strategy: "Wait for market conditions to improve or rent property until conditions stabilize.", timeline: "6-12+ months.", tradeoff: "Time and Effort" },
+
+        // Buyer's Market - INVESTOR
+        'speed-price-buyer-investor': { method: 'cash', title: "Direct Investor Target", subtitle: "Price must be extremely attractive to investors for a quick sale.", strategy: "Price aggressively (10-15% below land value) and target developers directly.", timeline: "28-45 days.", tradeoff: "Significant Price Loss (Necessary)" },
+        'speed-control-buyer-investor': { method: 'cash', title: "Fastest, Zero-Hassle Sale", subtitle: "The most recommended path: sell to a cash investor for speed and certainty.", strategy: "Private cash offer with zero contingencies, sell as-is.", timeline: "14-28 days.", tradeoff: "Major Price Loss (20-30%)" },
+        'price-speed-buyer-investor': { method: 'realtor', title: "Maximize Investor Price, Long Term View", subtitle: "Achieving top investor price requires a long timeline and detailed marketing of the asset.", strategy: "MLS listing highlighting detailed cash flow/development projections.", timeline: "75+ days.", tradeoff: "Extreme Time Commitment" },
+        'price-control-buyer-investor': { method: 'realtor', title: "Price Focus: Wait for Market Turn", subtitle: "Do not sell now if price is primary. The market is too weak for maximum value and low effort.", strategy: "Delay sale 6-12 months or convert to rental until market recovers.", timeline: "6-12+ months.", tradeoff: "Time and Rental Hassle" },
+        'control-speed-buyer-investor': { method: 'cash', title: "Fastest, Easiest Sale (Investor)", subtitle: "Sell to a cash investor to meet your speed/control needs.", strategy: "Private cash offer with a guaranteed, quick close.", timeline: "14-28 days.", tradeoff: "Major Price Loss (20-30%)" },
+        'control-price-buyer-investor': { method: 'realtor', title: "Control Focus: Wait for Market Turn", subtitle: "Do not sell now. List later when you can get a better price with less effort.", strategy: "Wait for market conditions to improve or rent property until conditions stabilize.", timeline: "6-12+ months.", tradeoff: "Time and Rental Hassle" },
+    };
+
+
+    // --- DOM Elements ---
+    const form = document.getElementById('input-form');
+    const resultDiv = document.getElementById('result');
+    const findStrategyBtn = document.getElementById('findStrategyBtn');
+    
+    // Step 1
+    const priority1Options = document.querySelectorAll('input[name="firstPriority"]');
+    
+    // Step 2
+    const priority2Container = document.getElementById('step-2-container');
+    const priority2OptionsDiv = document.getElementById('priority2-options');
+    
+    // Step 3
+    const cityInput = document.getElementById('cityInput');
+    const propertyTypeSelect = document.getElementById('propertyTypeSelect');
+    const profileInputs = document.querySelectorAll('input[name="propertyProfile"]');
+    
+    // Step 4
+    const googlePromptDisplay = document.getElementById('google-prompt-display');
+    const marketInputs = document.querySelectorAll('input[name="marketType"]');
+
+
+    // --- Core Functions ---
+
+    // 1. Check Form Validity (Checks all 4 steps/6 inputs)
+    function checkFormValidity() {
+        // Step 1 & 2
+        const p1 = document.querySelector('input[name="firstPriority"]:checked');
+        const p2 = document.querySelector('input[name="secondPriority"]:checked');
+        
+        // Step 3
+        const city = cityInput.value.trim();
+        const type = propertyTypeSelect.value;
+        const profile = document.querySelector('input[name="propertyProfile"]:checked');
+
+        // Step 4
+        const market = document.querySelector('input[name="marketType"]:checked');
+
+        // Button only enables when ALL required fields are filled
+        if (p1 && p2 && city && type && profile && market) {
+            findStrategyBtn.disabled = false;
+        } else {
+            findStrategyBtn.disabled = true;
+        }
+    }
+
+    // 2. Populate Priority 2 Options
+    function populatePriority2(p1) {
+        priority2OptionsDiv.innerHTML = '';
+        const priorities = [
+            { id: 'speed', label: 'Speed (I need to sell quickly)' },
+            { id: 'price', label: 'Price (I want maximum value/profit)' },
+            { id: 'control', label: 'Control / Zero-Cost (I want maximum control OR to minimize commission)' }
+        ];
+
+        // Filters out the choice made in P1
+        priorities.filter(p => p.id !== p1).forEach(p => { 
+            const label = document.createElement('label');
+            label.innerHTML = `
+                <input type="radio" name="secondPriority" value="${p.id}" required>
+                <span>${p.label}</span>
+            `;
+            priority2OptionsDiv.appendChild(label);
+        });
+
+        // Add event listener to the newly created radio buttons
+        document.querySelectorAll('input[name="secondPriority"]').forEach(input => {
+            input.addEventListener('change', checkFormValidity);
+        });
+        priority2Container.style.display = 'block'; // Make P2 visible
+    }
+
+    // 3. Dynamic Google Prompt Generation (Triggers on City/Type changes)
+    function generateGooglePrompt() {
+        const city = cityInput.value.trim();
+        const type = propertyTypeSelect.value;
+        
+        if (city && type) {
+            // Construct the specific search query
+            const searchQuery = `${city} real estate months of supply for ${type}`;
+            
+            // Create the Google Search URL
+            const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+            
+            googlePromptDisplay.innerHTML = `
+                Your specific search prompt is: <br>
+                <strong style="color: #1a73e8;">"${searchQuery}"</strong><br>
+                <a href="${googleUrl}" target="_blank" style="color: #1a73e8; text-decoration: underline; font-weight: bold;">Click here to search Google now ↗</a>
+            `;
+            googlePromptDisplay.style.display = 'block';
+        } else {
+            googlePromptDisplay.style.display = 'none';
+        }
+        
+        checkFormValidity();
+    }
+
+    // 4. Generate Final Comparison Output (UPDATED for bold/clear formatting)
+    function generateComparisonOutput(recommendation, marketType, propertyProfile) {
+        const marketLabel = { 'seller': "Seller's Market", 'buyer': "Buyer's Market", 'balanced': "Balanced Market" }[marketType];
+        const profileLabel = { 'retail': "Retail/Lifestyle Buyer", 'investor': "Investor/As-Is Buyer" }[propertyProfile];
+        const strategyKey = recommendation.method;
+        const recommendedMethod = SELLING_METHODS[strategyKey];
+
+        const p1LabelFull = document.querySelector('input[name="firstPriority"]:checked').nextElementSibling.textContent;
+        const p2LabelFull = document.querySelector('input[name="secondPriority"]:checked').nextElementSibling.textContent;
+        const p1Label = p1LabelFull.split('(')[0].trim();
+        const p2Label = p2LabelFull.split('(')[0].trim();
+
+
+        let comparisonHTML = `
+            <div style="background-color: #e8f0fe; padding: 25px; border-radius: 8px;">
+                <h3>Your Custom Selling Strategy: **${recommendation.title}**</h3>
+                <p style="font-weight: bold; color: #1a73e8;">Market: ${marketLabel} | Property Focus: ${profileLabel}</p>
+                <p style="font-style: italic;">${recommendation.subtitle}</p>
+                
+                <h4 style="color: #1a73e8;">Your Priorities: **${p1Label}** and **${p2Label}**</h4>
+            </div>
+
+            <div class="recommended-method">
+                ✅ RECOMMENDED ACTION: **${recommendedMethod.name.toUpperCase()}**
+            </div>
+            
+            <h4 style="margin-top: 25px;">Reasoning for this Strategy:</h4>
+            <p>Based on your market, property, and priorities, this method gives you the **highest probability of success** by prioritizing your most critical goals (Speed, Price, or Control).</p>
+            
+            <div style="padding: 15px; border: 1px solid #c8dafc; border-radius: 8px; background-color: #f0f8ff;">
+                <h4 style="color: #00897b; margin-top: 0;">Pros of Recommended Method:</h4>
+                <ul class="pros-list" style="color: #00897b; list-style: square;">
+                    ${recommendedMethod.pros.map(pro => `<li>${pro}</li>`).join('')}
+                </ul>
+            </div>
+            
+            <hr style="margin-top: 25px; margin-bottom: 25px;">
+
+            <h4>Other Options: Can Be Done, But Not Optimal 🚫</h4>
+            <p>The methods below would likely force a compromise on your primary goals, especially in your current market and with your property type. Use caution if considering them.</p>
+        `;
+
+        // Generate comparison for OTHER options
+        for (const [key, method] of Object.entries(SELLING_METHODS)) {
+            if (key !== strategyKey) {
+                comparisonHTML += `
+                    <div class="not-optimal-method">
+                        <h4 style="color: #e65100; margin-top: 0;">Option Not Recommended: **${method.name}**</h4>
+                        <p>This method carries **significant risk** to your most important priorities in your current situation. </p>
+                        <p style="font-weight: bold; margin-bottom: 5px;">Key Drawbacks (Cons):</p>
+                        <ul style="list-style: disc; margin-left: 20px; color: #a00;">
+                            ${method.cons.map(con => `<li>${con}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+        }
+        
+        // Add the Calendly button 
+        comparisonHTML += `<h4 style="margin-top: 25px;">Ready for a Personalized Plan?</h4>`;
+        comparisonHTML += `<a href="https://calendly.com/calgaryhomesale1/free-seller-consultation-call?back=1&month=2025-11" target="_blank" style="text-decoration: none;"><button style="margin-top: 15px; width: 100%; padding: 15px; background-color: #f5b700; color: white; border: none; border-radius: 6px; font-size: 1.1em; cursor: pointer;">Book Your Free Seller Consultation</button></a>`;
+        comparisonHTML += `<button onclick="window.location.reload()" style="margin-top: 20px; width: 100%; padding: 10px; background-color: #f4f4f4; color: #333; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;">Start Over</button>`;
+
+        return comparisonHTML;
+    }
+
+
+    // --- Event Listeners ---
+
+    // Step 1: Priority 1 Change (Populates Step 2)
+    priority1Options.forEach(input => {
+        input.addEventListener('change', (e) => {
+            populatePriority2(e.target.value);
+            checkFormValidity();
+        });
+    });
+
+    // Step 3: Property Detail Changes (Triggers Google prompt)
+    cityInput.addEventListener('input', generateGooglePrompt);
+    propertyTypeSelect.addEventListener('change', generateGooglePrompt);
+    profileInputs.forEach(input => input.addEventListener('change', generateGooglePrompt)); 
+    
+    // Step 4: Market Type Change (Only checks validity)
+    marketInputs.forEach(input => input.addEventListener('change', checkFormValidity));
+
+
+    // Final Button Click
+    findStrategyBtn.addEventListener('click', () => {
+        const marketType = document.querySelector('input[name="marketType"]:checked').value;
+        const propertyProfile = document.querySelector('input[name="propertyProfile"]:checked').value;
+        const firstPriority = document.querySelector('input[name="firstPriority"]:checked').value;
+        const secondPriority = document.querySelector('input[name="secondPriority"]:checked').value;
+        
+        // 4-part key lookup
+        const key = `${firstPriority}-${secondPriority}-${marketType}-${propertyProfile}`;
+        const rec = MARKET_SCENARIOS[key];
+
+        if (!rec) {
+            resultDiv.innerHTML = '<h3>Error: Could not find a specific scenario for your combination.</h3><p>Please try a different combination.</p>';
+            resultDiv.style.display = 'block';
+            return;
+        }
+        
+        const finalHTML = generateComparisonOutput(rec, marketType, propertyProfile);
+
+        resultDiv.innerHTML = finalHTML;
+        resultDiv.style.display = 'block';
+        document.getElementById('input-form').style.display = 'none';
+        window.scrollTo(0, 0);
+    });
+
+</script>
+
+</body>
+</html>

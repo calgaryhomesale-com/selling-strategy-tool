@@ -1,556 +1,540 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Selling Strategy Finder</title>
+    <style>
+        /* Basic Reset and Structure */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f9;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .step-section {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        .step-section h2 {
+            margin-top: 0;
+            color: #1a73e8;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        /* Input Styles */
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option-group label {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .option-group input[type="radio"] {
+            margin-right: 15px;
+            accent-color: #1a73e8; /* Custom color for radio button */
+            transform: scale(1.2);
+        }
+        .option-group label:hover {
+            border-color: #8ab4f8;
+        }
+        .option-group input:checked + span {
+            font-weight: bold;
+            color: #1a73e8;
+        }
+        .option-group input:checked ~ label {
+             border-color: #1a73e8;
+             background-color: #e8f0fe;
+        }
+
+        /* Button Style */
+        #findStrategyBtn {
+            width: 100%;
+            padding: 15px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #findStrategyBtn:hover:not(:disabled) {
+            background-color: #174ea6;
+        }
+        #findStrategyBtn:disabled {
+            background-color: #a0c3ff;
+            cursor: not-allowed;
+        }
+
+        /* Result Styles */
+        #result {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            background-color: #e8f0fe;
+            border-left: 5px solid #1a73e8;
+        }
+        #result h3 {
+            color: #1a73e8;
+            font-size: 1.6em;
+            margin-top: 0;
+            border-bottom: 1px solid #c8dafc;
+            padding-bottom: 10px;
+        }
+        #result h4 {
+            color: #333;
+            margin-top: 15px;
+            font-size: 1.2em;
+        }
+        #result p {
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .tradeoff {
+            background-color: #fff3e0;
+            border: 1px solid #ffcc80;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        .tradeoff strong {
+            color: #e65100;
+        }
+        .pros-list {
+            list-style: disc;
+            margin-left: 20px;
+            color: #00897b;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Home Selling Strategy Finder&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Basic Reset and Structure */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: Arial, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f4f7f9;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 700px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 30px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>h1 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 5px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.subtitle {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #666;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 25px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.step-section {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #ddd;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f9f9f9;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.step-section h2 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #1a73e8;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 2px solid #e0e0e0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.3em;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Input Styles */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.option-group {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.option-group label {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #ccc;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.2s;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.option-group input[type="radio"] {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-right: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>accent-color: #1a73e8; /* Custom color for radio button */</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.2);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.option-group label:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-color: #8ab4f8;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.option-group input:checked + span {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #1a73e8;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.option-group input:checked ~ label {</p>
-<p class="p1"><span class="Apple-converted-space">             </span>border-color: #1a73e8;</p>
-<p class="p1"><span class="Apple-converted-space">             </span>background-color: #e8f0fe;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Button Style */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>#findStrategyBtn {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #1a73e8;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1em;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.3s;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>#findStrategyBtn:hover:not(:disabled) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #174ea6;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>#findStrategyBtn:disabled {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #a0c3ff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: not-allowed;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Result Styles */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>#result {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 30px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 25px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #e8f0fe;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-left: 5px solid #1a73e8;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>#result h3 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #1a73e8;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.6em;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid #c8dafc;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>#result h4 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.2em;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>#result p {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #555;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.tradeoff {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #fff3e0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #ffcc80;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.tradeoff strong {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #e65100;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.pros-list {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>list-style: disc;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-left: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #00897b;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;🏠 Home Selling Strategy Finder&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="subtitle"&gt;Select your market type and priorities to find the best approach.&lt;/p&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="input-form"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="step-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;Step 1: What is the current market condition?&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="option-group" id="market-options"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="radio" name="marketType" value="seller" required&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Seller's Market (Low inventory, homes sell fast)&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="radio" name="marketType" value="balanced"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Balanced Market (Fair conditions for buyers and sellers)&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="radio" name="marketType" value="buyer"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Buyer's Market (Lots of inventory, homes sit longer)&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="step-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;Step 2: What is your #1 most important goal?&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="option-group" id="priority1-options"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="radio" name="firstPriority" value="speed" required&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Speed (I need to sell quickly)&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="radio" name="firstPriority" value="price"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Price (I want maximum value/profit)&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="radio" name="firstPriority" value="convenience"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Convenience (I want the easiest, least stressful process)&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="step-section" id="step-3-container" style="display: none;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;Step 3: What is your #2 priority?&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p style="color: #c00; font-weight: bold;"&gt;(You cannot choose your first priority again)&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="option-group" id="priority2-options"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="findStrategyBtn" disabled&gt;Find My Strategy&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="result" style="display: none;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const MARKET_SCENARIOS = {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// ... (The large scenario object is added below in the JavaScript section) ...</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const form = document.getElementById('input-form');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const resultDiv = document.getElementById('result');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const findStrategyBtn = document.getElementById('findStrategyBtn');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const priority1Options = document.querySelectorAll('input[name="firstPriority"]');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const priority2Container = document.getElementById('step-3-container');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const priority2OptionsDiv = document.getElementById('priority2-options');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>let firstPriority = '';</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// --- Step 1: Handle Priority 1 Selection ---</p>
-<p class="p1"><span class="Apple-converted-space">    </span>priority1Options.forEach(input =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>input.addEventListener('change', (e) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>firstPriority = e.target.value;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>populatePriority2(firstPriority);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>priority2Container.style.display = 'block';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>checkFormValidity();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// --- Step 2: Populate Priority 2 Options ---</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function populatePriority2(p1) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>priority2OptionsDiv.innerHTML = ''; // Clear existing options</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const priorities = [</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{ id: 'speed', label: 'Speed (Sell quickly)' },</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{ id: 'price', label: 'Price (Maximize profit)' },</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{ id: 'convenience', label: 'Convenience (Easy, low stress)' }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>priorities.filter(p =&gt; p.id !== p1).forEach(p =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const label = document.createElement('label');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>label.innerHTML = `</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="radio" name="secondPriority" value="${p.id}" required&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;${p.label}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>priority2OptionsDiv.appendChild(label);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Add event listener to the newly created radio buttons</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.querySelectorAll('input[name="secondPriority"]').forEach(input =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>input.addEventListener('change', checkFormValidity);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// --- Step 3: Check Form Validity and Enable Button ---</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function checkFormValidity() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const market = document.querySelector('input[name="marketType"]:checked');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const p1 = document.querySelector('input[name="firstPriority"]:checked');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const p2 = document.querySelector('input[name="secondPriority"]:checked');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (market &amp;&amp; p1 &amp;&amp; p2) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>findStrategyBtn.disabled = false;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>findStrategyBtn.disabled = true;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Add event listeners to market type selection on page load</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.querySelectorAll('input[name="marketType"]').forEach(input =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>input.addEventListener('change', checkFormValidity);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// --- Step 4: Display Result ---</p>
-<p class="p1"><span class="Apple-converted-space">    </span>findStrategyBtn.addEventListener('click', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const marketType = document.querySelector('input[name="marketType"]:checked').value;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const firstPriority = document.querySelector('input[name="firstPriority"]:checked').value;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const secondPriority = document.querySelector('input[name="secondPriority"]:checked').value;</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const key = `${firstPriority}-${secondPriority}-${marketType}`;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const rec = MARKET_SCENARIOS[key];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (!rec) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>resultDiv.innerHTML = '&lt;h3&gt;Error: Could not find a specific scenario for your combination.&lt;/h3&gt;&lt;p&gt;Please try a different combination.&lt;/p&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>resultDiv.style.display = 'block';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Map market type for display</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const marketLabel = {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>'seller': "Seller's Market",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>'buyer': "Buyer's Market",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>'balanced': "Balanced Market"</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}[marketType];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Format the pros list</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const prosListHTML = rec.pros.map(pro =&gt; `&lt;li&gt;${pro}&lt;/li&gt;`).join('');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>resultDiv.innerHTML = `</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;Your Selling Strategy: ${rec.title}&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p style="font-weight: bold; color: #388e3c;"&gt;Market Condition: ${marketLabel}&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p style="font-style: italic;"&gt;${rec.subtitle}&lt;/p&gt;</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h4&gt;Summary&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;${rec.description}&lt;/p&gt;</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h4&gt;Core Strategy&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;&lt;strong&gt;Method:&lt;/strong&gt; ${rec.strategy}&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;&lt;strong&gt;Timeline:&lt;/strong&gt; ${rec.timeline}&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h4&gt;Key Benefits&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;ul class="pros-list"&gt;${prosListHTML}&lt;/ul&gt;</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="tradeoff"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h4&gt;⚠️ The Trade-off: ${rec.tradeoff}&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;&lt;strong&gt;Reasoning:&lt;/strong&gt; ${rec.tradeoffExplanation}&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h4 style="color: #ff9800;"&gt;Next Steps&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p style="font-weight: bold;"&gt;${rec.nextSteps}&lt;/p&gt;</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="window.location.reload()" style="margin-top: 20px; width: 100%; padding: 10px; background-color: #f4f4f4; color: #333; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;"&gt;Start Over&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>resultDiv.style.display = 'block';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('input-form').style.display = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>window.scrollTo(0, 0); // Scroll to top to see the result</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// --- MARKET_SCENARIOS Object (Copied directly from your original logic) ---</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// NOTE: I am using the content of your original scenario object here, which is large.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// For brevity in this response block, I will just include the placeholder comment,<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// but in the final code you save, the full object content must be placed here.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const scenarios = {</p>
-<p class="p1">      // Seller's Market scenarios</p>
-<p class="p1">      'speed-price-seller': {</p>
-<p class="p1">        title: "Fast Sale at Top Dollar",</p>
-<p class="p1">        subtitle: "You can have your cake and eat it too!",</p>
-<p class="p1">        description: "In a seller's market, you don't have to sacrifice much! Price competitively at market value and you'll get multiple offers within days, often above asking price.",</p>
-<p class="p1">        strategy: "Traditional MLS listing with professional photos and strategic pricing just below market to create urgency",</p>
-<p class="p1">        timeline: "7-14 days to offer, likely multiple bids",</p>
-<p class="p1">        tradeoff: "Convenience",</p>
-<p class="p1">        tradeoffExplanation: "You'll need to keep your home show-ready and accommodate showings on short notice. The good news? It won't be for long!",</p>
-<p class="p1">        pros: ["Multiple offers likely", "Bidding wars common", "Quick close possible", "Full market exposure"],</p>
-<p class="p1">        nextSteps: "Let's get your home camera-ready and create a pricing strategy that triggers competition!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'speed-convenience-seller': {</p>
-<p class="p1">        title: "Fast &amp; Easy Exit",</p>
-<p class="p1">        subtitle: "Sell quickly without the hassle",</p>
-<p class="p1">        description: "Cash buyers or iBuyers will jump on your property quickly in this hot market. You'll get a decent offer with zero stress.",</p>
-<p class="p1">        strategy: "Direct cash sale to vetted investor or iBuyer platform",</p>
-<p class="p1">        timeline: "3-7 days to offer and close",</p>
-<p class="p1">        tradeoff: "Price",</p>
-<p class="p1">        tradeoffExplanation: "You'll likely get 5-10% below market value, but in exchange you skip all showings, repairs, and uncertainty. For many sellers in a hot market, that's a great trade.",</p>
-<p class="p1">        pros: ["Zero showings", "Sell as-is", "Pick your close date", "Guaranteed sale"],</p>
-<p class="p1">        nextSteps: "I'll connect you with 3+ vetted cash buyers to get competitive offers!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'price-speed-seller': {</p>
-<p class="p1">        title: "Maximum Value Quickly",</p>
-<p class="p1">        subtitle: "Get top dollar fast",</p>
-<p class="p1">        description: "This market is perfect for your goals! Price at market value with excellent presentation and watch the offers roll in.",</p>
-<p class="p1">        strategy: "Premium listing with staging, professional marketing, and strategic pricing",</p>
-<p class="p1">        timeline: "10-21 days to best offer",</p>
-<p class="p1">        tradeoff: "Convenience",</p>
-<p class="p1">        tradeoffExplanation: "You'll invest time in staging and keep the home pristine for showings, but it'll pay off in both speed and price.",</p>
-<p class="p1">        pros: ["Top market value", "Quick sale", "Multiple offers expected", "Strong negotiating position"],</p>
-<p class="p1">        nextSteps: "Let's create a winning presentation that commands top dollar!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'price-convenience-seller': {</p>
-<p class="p1">        title: "Premium Price, Your Terms",</p>
-<p class="p1">        subtitle: "Best of both worlds",</p>
-<p class="p1">        description: "In a seller's market, you have leverage! List at a premium with limited showing times that work for YOU. Buyers will accommodate.",</p>
-<p class="p1">        strategy: "Premium pricing with seller-controlled showing schedule",</p>
-<p class="p1">        timeline: "21-45 days",</p>
-<p class="p1">        tradeoff: "Speed",</p>
-<p class="p1">        tradeoffExplanation: "Being selective with showings means it'll take a bit longer, but you'll still get great offers while maintaining your lifestyle.",</p>
-<p class="p1">        pros: ["Top dollar", "Control your schedule", "Less disruption", "Quality buyers only"],</p>
-<p class="p1">        nextSteps: "Let's set premium pricing and showing terms that work for your life!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'convenience-speed-seller': {</p>
-<p class="p1">        title: "Quick &amp; Hassle-Free",</p>
-<p class="p1">        subtitle: "Fastest, easiest path",</p>
-<p class="p1">        description: "Cash buyers love this market and will move fast. Sell as-is with zero stress in under a week.",</p>
-<p class="p1">        strategy: "Direct cash sale with expedited closing",</p>
-<p class="p1">        timeline: "3-7 days",</p>
-<p class="p1">        tradeoff: "Price",</p>
-<p class="p1">        tradeoffExplanation: "Expect 8-12% below market value, but you'll save on repairs, closing costs, and the stress of traditional selling.",</p>
-<p class="p1">        pros: ["Ultra-fast", "Zero prep needed", "No showings", "Certainty guaranteed"],</p>
-<p class="p1">        nextSteps: "Let's get you multiple cash offers today!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'convenience-price-seller': {</p>
-<p class="p1">        title: "Easy Sale at Fair Value",</p>
-<p class="p1">        subtitle: "Good price without the hassle",</p>
-<p class="p1">        description: "Light staging and limited showings still work great when buyers are hungry. Keep it simple and still get close to top dollar.",</p>
-<p class="p1">        strategy: "Simplified listing with minimal prep and controlled showings",</p>
-<p class="p1">        timeline: "21-35 days",</p>
-<p class="p1">        tradeoff: "Speed",</p>
-<p class="p1">        tradeoffExplanation: "By limiting showings to your schedule, you might miss a few early birds, but patient buyers will pay well for a convenient viewing.",</p>
-<p class="p1">        pros: ["Strong price", "Low stress", "Limited disruption", "Good buyer pool"],</p>
-<p class="p1">        nextSteps: "Let's create a simple but effective selling plan!"</p>
-<p class="p1">      },</p>
-<p class="p2"><br></p>
-<p class="p1">      // Balanced Market scenarios</p>
-<p class="p1">      'speed-price-balanced': {</p>
-<p class="p1">        title: "Fast Sale at Fair Value",</p>
-<p class="p1">        subtitle: "Strategic pricing wins",</p>
-<p class="p1">        description: "Price 3-5% below market and you'll create urgency. In a balanced market, this triggers quick action and often multiple offers that bring you back to market value.",</p>
-<p class="p1">        strategy: "MLS listing with competitive pricing and professional presentation",</p>
-<p class="p1">        timeline: "14-28 days to offer",</p>
-<p class="p1">        tradeoff: "Convenience",</p>
-<p class="p1">        tradeoffExplanation: "You'll need to accommodate frequent showings and keep your home in top condition, but it's the path to both speed and good value.",</p>
-<p class="p1">        pros: ["Quick sale", "Likely multiple offers", "Fair market price", "Less time on market"],</p>
-<p class="p1">        nextSteps: "Let's analyze recent comps and price strategically for fast action!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'speed-convenience-balanced': {</p>
-<p class="p1">        title: "Quick &amp; Easy Sale",</p>
-<p class="p1">        subtitle: "Speed without the stress",</p>
-<p class="p1">        description: "Cash buyers or a quick-close traditional sale with minimal prep. You'll sell fast without the traditional hassle.",</p>
-<p class="p1">        strategy: "Dual approach: cash offers + streamlined MLS listing",</p>
-<p class="p1">        timeline: "10-21 days",</p>
-<p class="p1">        tradeoff: "Price",</p>
-<p class="p1">        tradeoffExplanation: "Expect 10-15% below peak value with cash buyers, or 5-8% below with quick traditional sale. The time and stress you save often makes it worthwhile.",</p>
-<p class="p1">        pros: ["Fast certainty", "Low stress", "Minimal prep", "Flexible closing"],</p>
-<p class="p1">        nextSteps: "I'll get you both cash offers and a quick-list strategy to compare!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'price-speed-balanced': {</p>
-<p class="p1">        title: "Maximize Value Quickly",</p>
-<p class="p1">        subtitle: "Best price in reasonable time",</p>
-<p class="p1">        description: "Strong presentation at market value attracts serious buyers. In a balanced market, well-prepared homes stand out and sell faster at better prices.",</p>
-<p class="p1">        strategy: "Enhanced listing with staging, repairs, and aggressive marketing",</p>
-<p class="p1">        timeline: "21-35 days",</p>
-<p class="p1">        tradeoff: "Convenience",</p>
-<p class="p1">        tradeoffExplanation: "You'll invest time and energy in preparation and showings, but the ROI in both price and speed makes it worth it.",</p>
-<p class="p1">        pros: ["Top market price", "Reasonable timeline", "Quality buyers", "Competitive edge"],</p>
-<p class="p1">        nextSteps: "Let's identify the key improvements that'll pay off and market aggressively!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'price-convenience-balanced': {</p>
-<p class="p1">        title: "Strong Price, Low Stress",</p>
-<p class="p1">        subtitle: "Good value on your terms",</p>
-<p class="p1">        description: "List at market value with a seller-friendly showing schedule. It'll take a bit longer but you'll avoid most of the hassle while getting fair value.",</p>
-<p class="p1">        strategy: "Traditional listing with limited, scheduled showings",</p>
-<p class="p1">        timeline: "35-60 days",</p>
-<p class="p1">        tradeoff: "Speed",</p>
-<p class="p1">        tradeoffExplanation: "Restricting showings to specific times means fewer buyers will see it immediately, extending your timeline. But you'll maintain your lifestyle and still get a fair price.",</p>
-<p class="p1">        pros: ["Market-rate price", "Your schedule rules", "Less disruption", "Lower stress"],</p>
-<p class="p1">        nextSteps: "Let's set up a showing schedule that works for your life!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'convenience-speed-balanced': {</p>
-<p class="p1">        title: "Fast &amp; Simple Path",</p>
-<p class="p1">        subtitle: "Quick sale without hassle",</p>
-<p class="p1">        description: "Cash sale is your best bet. You'll close in days without repairs, showings, or uncertainty.",</p>
-<p class="p1">        strategy: "Direct cash buyer sale",</p>
-<p class="p1">        timeline: "7-14 days",</p>
-<p class="p1">        tradeoff: "Price",</p>
-<p class="p1">        tradeoffExplanation: "Cash buyers typically offer 12-18% below market in balanced conditions, but you'll save on repairs, closing costs, and months of stress.",</p>
-<p class="p1">        pros: ["Very fast", "Zero hassle", "As-is sale", "Guaranteed close"],</p>
-<p class="p1">        nextSteps: "Let me get you competing cash offers from vetted buyers!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'convenience-price-balanced': {</p>
-<p class="p1">        title: "Easy Process, Fair Value",</p>
-<p class="p1">        subtitle: "Good price without much effort",</p>
-<p class="p1">        description: "Minimal prep with honest 'as-is' pricing attracts the right buyers. You'll get reasonable value without the traditional hassle.",</p>
-<p class="p1">        strategy: "Simplified listing marketed to as-is buyers",</p>
-<p class="p1">        timeline: "30-50 days",</p>
-<p class="p1">        tradeoff: "Speed",</p>
-<p class="p1">        tradeoffExplanation: "The as-is approach attracts a smaller buyer pool, so it'll take longer. But you'll avoid repairs and staging while still getting decent value.",</p>
-<p class="p1">        pros: ["Fair price", "Minimal effort", "No major repairs", "Right buyer fit"],</p>
-<p class="p1">        nextSteps: "Let's position your home for realistic, as-is buyers!"</p>
-<p class="p1">      },</p>
-<p class="p2"><br></p>
-<p class="p1">      // Buyer's Market scenarios</p>
-<p class="p1">      'speed-price-buyer': {</p>
-<p class="p1">        title: "Challenging But Possible",</p>
-<p class="p1">        subtitle: "Smart strategy required",</p>
-<p class="p1">        description: "Getting both speed and price in a buyer's market is tough but not impossible. Aggressive pricing and incentives can work, but you'll need to be realistic.",</p>
-<p class="p1">        strategy: "Competitive pricing (5-8% below comps) with buyer incentives and aggressive marketing",</p>
-<p class="p1">        timeline: "30-60 days",</p>
-<p class="p1">        tradeoff: "Convenience",</p>
-<p class="p1">        tradeoffExplanation: "You'll need to keep your home immaculate and accommodate all showing requests. Even then, expect negotiations and possible concessions.",</p>
-<p class="p1">        pros: ["Better than cash buyer", "Some negotiating room", "Traditional sale", "Price control"],</p>
-<p class="p1">        nextSteps: "Let's create a competitive package with pricing and incentives that stand out!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'speed-convenience-buyer': {</p>
-<p class="p1">        title: "Cash Sale Is Your Friend",</p>
-<p class="p1">        subtitle: "Best option for your goals",</p>
-<p class="p1">        description: "In a buyer's market wanting both speed and convenience? Cash buyers are your answer. They're actively looking and will close fast.",</p>
-<p class="p1">        strategy: "Direct cash buyer sale with quick close",</p>
-<p class="p1">        timeline: "7-14 days",</p>
-<p class="p1">        tradeoff: "Price",</p>
-<p class="p1">        tradeoffExplanation: "Expect 15-25% below peak market value. But you'll get certainty, speed, and zero hassle - often worth more than waiting months for maybe 10% more.",</p>
-<p class="p1">        pros: ["Guaranteed fast sale", "No showings", "As-is accepted", "Zero hassle", "Pick close date"],</p>
-<p class="p1">        nextSteps: "This is your best path - let me get you 3+ cash offers to compare!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'price-speed-buyer': {</p>
-<p class="p1">        title: "Price Focus with Realistic Timeline",</p>
-<p class="p1">        subtitle: "Maximize value strategically",</p>
-<p class="p1">        description: "In a buyer's market, maximizing price takes time. But with excellent presentation and smart pricing, you can do better than most while staying reasonably quick.",</p>
-<p class="p1">        strategy: "Premium presentation, competitive pricing, and sustained marketing",</p>
-<p class="p1">        timeline: "45-75 days",</p>
-<p class="p1">        tradeoff: "Convenience",</p>
-<p class="p1">        tradeoffExplanation: "You'll need to invest in improvements, stage beautifully, and accommodate extensive showings. It's work, but necessary for top dollar in this market.",</p>
-<p class="p1">        pros: ["Best achievable price", "Quality buyers", "Professional approach", "Competitive advantage"],</p>
-<p class="p1">        nextSteps: "Let's make your home the obvious choice in its price range!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'price-convenience-buyer': {</p>
-<p class="p1">        title: "Consider Waiting or Renting",</p>
-<p class="p1">        subtitle: "Timing might be better later",</p>
-<p class="p1">        description: "Wanting both price and convenience in a buyer's market? Your best move might be waiting 6-12 months for conditions to improve, or converting to a rental.",</p>
-<p class="p1">        strategy: "Delay sale until market improves or convert to rental property",</p>
-<p class="p1">        timeline: "6-12+ months",</p>
-<p class="p1">        tradeoff: "Speed",</p>
-<p class="p1">        tradeoffExplanation: "Markets cycle. If you can wait, you'll get better pricing with less effort. Or rent it out for income while building equity until conditions improve.",</p>
-<p class="p1">        pros: ["Better future value", "Rental income option", "Market timing", "No pressure sale"],</p>
-<p class="p1">        nextSteps: "Let's discuss rental potential and create a timeline strategy!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'convenience-speed-buyer': {</p>
-<p class="p1">        title: "Cash Buyer All Day",</p>
-<p class="p1">        subtitle: "Perfect solution for you",</p>
-<p class="p1">        description: "This is exactly what cash buyers are for! In a buyer's market, they'll still move quickly and take the property as-is.",</p>
-<p class="p1">        strategy: "Multiple cash buyer offers with best terms",</p>
-<p class="p1">        timeline: "5-10 days",</p>
-<p class="p1">        tradeoff: "Price",</p>
-<p class="p1">        tradeoffExplanation: "You'll get 18-25% below peak value, but you'll avoid the painful process of competing in a buyer's market for months.",</p>
-<p class="p1">        pros: ["Ultra-fast", "Zero showings", "No repairs", "Guaranteed", "Total convenience"],</p>
-<p class="p1">        nextSteps: "Let me connect you with cash buyers immediately!"</p>
-<p class="p1">      },</p>
-<p class="p1">      'convenience-price-buyer': {</p>
-<p class="p1">        title: "Wait for Better Conditions",</p>
-<p class="p1">        subtitle: "Patience pays in this market",</p>
-<p class="p1">        description: "In a buyer's market, getting both convenience and good price is nearly impossible. Consider renting it out or waiting for the market to shift in 6-12 months.",</p>
-<p class="p1">        strategy: "Rent property or wait for market improvement",</p>
-<p class="p1">        timeline: "6-12+ months",</p>
-<p class="p1">        tradeoff: "Speed",</p>
-<p class="p1">        tradeoffExplanation: "If you list now with minimal effort in a buyer's market, you'll get lowball offers. Better to wait or rent for income until conditions improve.",</p>
-<p class="p1">        pros: ["Higher future value", "Rental income", "Avoid bad timing", "Strategic patience"],</p>
-<p class="p1">        nextSteps: "Let's explore rental options and track market conditions together!"</p>
-<p class="p1">      },</p>
-<p class="p1">    };</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Assign the scenarios object to the constant used in the script</p>
-<p class="p1"><span class="Apple-converted-space">    </span>Object.assign(MARKET_SCENARIOS, scenarios);</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+<div class="container">
+    <h1>🏠 Home Selling Strategy Finder</h1>
+    <p class="subtitle">Select your market type and priorities to find the best approach.</p>
+    
+    <div id="input-form">
+        <div class="step-section">
+            <h2>Step 1: What is the current market condition?</h2>
+            <div class="option-group" id="market-options">
+                <label>
+                    <input type="radio" name="marketType" value="seller" required>
+                    <span>Seller's Market (Low inventory, homes sell fast)</span>
+                </label>
+                <label>
+                    <input type="radio" name="marketType" value="balanced">
+                    <span>Balanced Market (Fair conditions for buyers and sellers)</span>
+                </label>
+                <label>
+                    <input type="radio" name="marketType" value="buyer">
+                    <span>Buyer's Market (Lots of inventory, homes sit longer)</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="step-section">
+            <h2>Step 2: What is your #1 most important goal?</h2>
+            <div class="option-group" id="priority1-options">
+                <label>
+                    <input type="radio" name="firstPriority" value="speed" required>
+                    <span>Speed (I need to sell quickly)</span>
+                </label>
+                <label>
+                    <input type="radio" name="firstPriority" value="price">
+                    <span>Price (I want maximum value/profit)</span>
+                </label>
+                <label>
+                    <input type="radio" name="firstPriority" value="convenience">
+                    <span>Convenience (I want the easiest, least stressful process)</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="step-section" id="step-3-container" style="display: none;">
+            <h2>Step 3: What is your #2 priority?</h2>
+            <p style="color: #c00; font-weight: bold;">(You cannot choose your first priority again)</p>
+            <div class="option-group" id="priority2-options">
+                </div>
+        </div>
+
+        <button id="findStrategyBtn" disabled>Find My Strategy</button>
+    </div>
+
+    <div id="result" style="display: none;">
+        </div>
+
+</div>
+
+<script>
+    const MARKET_SCENARIOS = {
+        // ... (The large scenario object is added below in the JavaScript section) ...
+    };
+
+    const form = document.getElementById('input-form');
+    const resultDiv = document.getElementById('result');
+    const findStrategyBtn = document.getElementById('findStrategyBtn');
+    const priority1Options = document.querySelectorAll('input[name="firstPriority"]');
+    const priority2Container = document.getElementById('step-3-container');
+    const priority2OptionsDiv = document.getElementById('priority2-options');
+
+    let firstPriority = '';
+    
+    // --- Step 1: Handle Priority 1 Selection ---
+    priority1Options.forEach(input => {
+        input.addEventListener('change', (e) => {
+            firstPriority = e.target.value;
+            populatePriority2(firstPriority);
+            priority2Container.style.display = 'block';
+            checkFormValidity();
+        });
+    });
+
+    // --- Step 2: Populate Priority 2 Options ---
+    function populatePriority2(p1) {
+        priority2OptionsDiv.innerHTML = ''; // Clear existing options
+        const priorities = [
+            { id: 'speed', label: 'Speed (Sell quickly)' },
+            { id: 'price', label: 'Price (Maximize profit)' },
+            { id: 'convenience', label: 'Convenience (Easy, low stress)' }
+        ];
+
+        priorities.filter(p => p.id !== p1).forEach(p => {
+            const label = document.createElement('label');
+            label.innerHTML = `
+                <input type="radio" name="secondPriority" value="${p.id}" required>
+                <span>${p.label}</span>
+            `;
+            priority2OptionsDiv.appendChild(label);
+        });
+
+        // Add event listener to the newly created radio buttons
+        document.querySelectorAll('input[name="secondPriority"]').forEach(input => {
+            input.addEventListener('change', checkFormValidity);
+        });
+    }
+
+    // --- Step 3: Check Form Validity and Enable Button ---
+    function checkFormValidity() {
+        const market = document.querySelector('input[name="marketType"]:checked');
+        const p1 = document.querySelector('input[name="firstPriority"]:checked');
+        const p2 = document.querySelector('input[name="secondPriority"]:checked');
+
+        if (market && p1 && p2) {
+            findStrategyBtn.disabled = false;
+        } else {
+            findStrategyBtn.disabled = true;
+        }
+    }
+
+    // Add event listeners to market type selection on page load
+    document.querySelectorAll('input[name="marketType"]').forEach(input => {
+        input.addEventListener('change', checkFormValidity);
+    });
+
+    // --- Step 4: Display Result ---
+    findStrategyBtn.addEventListener('click', () => {
+        const marketType = document.querySelector('input[name="marketType"]:checked').value;
+        const firstPriority = document.querySelector('input[name="firstPriority"]:checked').value;
+        const secondPriority = document.querySelector('input[name="secondPriority"]:checked').value;
+        
+        const key = `${firstPriority}-${secondPriority}-${marketType}`;
+        const rec = MARKET_SCENARIOS[key];
+
+        if (!rec) {
+            resultDiv.innerHTML = '<h3>Error: Could not find a specific scenario for your combination.</h3><p>Please try a different combination.</p>';
+            resultDiv.style.display = 'block';
+            return;
+        }
+        
+        // Map market type for display
+        const marketLabel = {
+            'seller': "Seller's Market",
+            'buyer': "Buyer's Market",
+            'balanced': "Balanced Market"
+        }[marketType];
+
+        // Format the pros list
+        const prosListHTML = rec.pros.map(pro => `<li>${pro}</li>`).join('');
+
+        resultDiv.innerHTML = `
+            <h3>Your Selling Strategy: ${rec.title}</h3>
+            <p style="font-weight: bold; color: #388e3c;">Market Condition: ${marketLabel}</p>
+            <p style="font-style: italic;">${rec.subtitle}</p>
+            
+            <h4>Summary</h4>
+            <p>${rec.description}</p>
+            
+            <h4>Core Strategy</h4>
+            <p><strong>Method:</strong> ${rec.strategy}</p>
+            <p><strong>Timeline:</strong> ${rec.timeline}</p>
+
+            <h4>Key Benefits</h4>
+            <ul class="pros-list">${prosListHTML}</ul>
+            
+            <div class="tradeoff">
+                <h4>⚠️ The Trade-off: ${rec.tradeoff}</h4>
+                <p><strong>Reasoning:</strong> ${rec.tradeoffExplanation}</p>
+            </div>
+            
+            <h4 style="color: #ff9800;">Next Steps</h4>
+            <p style="font-weight: bold;">${rec.nextSteps}</p>
+            
+            <button onclick="window.location.reload()" style="margin-top: 20px; width: 100%; padding: 10px; background-color: #f4f4f4; color: #333; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;">Start Over</button>
+        `;
+
+        resultDiv.style.display = 'block';
+        document.getElementById('input-form').style.display = 'none';
+        window.scrollTo(0, 0); // Scroll to top to see the result
+    });
+
+    // --- MARKET_SCENARIOS Object (Copied directly from your original logic) ---
+    // NOTE: I am using the content of your original scenario object here, which is large.
+    // For brevity in this response block, I will just include the placeholder comment, 
+    // but in the final code you save, the full object content must be placed here.
+    const scenarios = {
+      // Seller's Market scenarios
+      'speed-price-seller': {
+        title: "Fast Sale at Top Dollar",
+        subtitle: "You can have your cake and eat it too!",
+        description: "In a seller's market, you don't have to sacrifice much! Price competitively at market value and you'll get multiple offers within days, often above asking price.",
+        strategy: "Traditional MLS listing with professional photos and strategic pricing just below market to create urgency",
+        timeline: "7-14 days to offer, likely multiple bids",
+        tradeoff: "Convenience",
+        tradeoffExplanation: "You'll need to keep your home show-ready and accommodate showings on short notice. The good news? It won't be for long!",
+        pros: ["Multiple offers likely", "Bidding wars common", "Quick close possible", "Full market exposure"],
+        nextSteps: "Let's get your home camera-ready and create a pricing strategy that triggers competition!"
+      },
+      'speed-convenience-seller': {
+        title: "Fast & Easy Exit",
+        subtitle: "Sell quickly without the hassle",
+        description: "Cash buyers or iBuyers will jump on your property quickly in this hot market. You'll get a decent offer with zero stress.",
+        strategy: "Direct cash sale to vetted investor or iBuyer platform",
+        timeline: "3-7 days to offer and close",
+        tradeoff: "Price",
+        tradeoffExplanation: "You'll likely get 5-10% below market value, but in exchange you skip all showings, repairs, and uncertainty. For many sellers in a hot market, that's a great trade.",
+        pros: ["Zero showings", "Sell as-is", "Pick your close date", "Guaranteed sale"],
+        nextSteps: "I'll connect you with 3+ vetted cash buyers to get competitive offers!"
+      },
+      'price-speed-seller': {
+        title: "Maximum Value Quickly",
+        subtitle: "Get top dollar fast",
+        description: "This market is perfect for your goals! Price at market value with excellent presentation and watch the offers roll in.",
+        strategy: "Premium listing with staging, professional marketing, and strategic pricing",
+        timeline: "10-21 days to best offer",
+        tradeoff: "Convenience",
+        tradeoffExplanation: "You'll invest time in staging and keep the home pristine for showings, but it'll pay off in both speed and price.",
+        pros: ["Top market value", "Quick sale", "Multiple offers expected", "Strong negotiating position"],
+        nextSteps: "Let's create a winning presentation that commands top dollar!"
+      },
+      'price-convenience-seller': {
+        title: "Premium Price, Your Terms",
+        subtitle: "Best of both worlds",
+        description: "In a seller's market, you have leverage! List at a premium with limited showing times that work for YOU. Buyers will accommodate.",
+        strategy: "Premium pricing with seller-controlled showing schedule",
+        timeline: "21-45 days",
+        tradeoff: "Speed",
+        tradeoffExplanation: "Being selective with showings means it'll take a bit longer, but you'll still get great offers while maintaining your lifestyle.",
+        pros: ["Top dollar", "Control your schedule", "Less disruption", "Quality buyers only"],
+        nextSteps: "Let's set premium pricing and showing terms that work for your life!"
+      },
+      'convenience-speed-seller': {
+        title: "Quick & Hassle-Free",
+        subtitle: "Fastest, easiest path",
+        description: "Cash buyers love this market and will move fast. Sell as-is with zero stress in under a week.",
+        strategy: "Direct cash sale with expedited closing",
+        timeline: "3-7 days",
+        tradeoff: "Price",
+        tradeoffExplanation: "Expect 8-12% below market value, but you'll save on repairs, closing costs, and the stress of traditional selling.",
+        pros: ["Ultra-fast", "Zero prep needed", "No showings", "Certainty guaranteed"],
+        nextSteps: "Let's get you multiple cash offers today!"
+      },
+      'convenience-price-seller': {
+        title: "Easy Sale at Fair Value",
+        subtitle: "Good price without the hassle",
+        description: "Light staging and limited showings still work great when buyers are hungry. Keep it simple and still get close to top dollar.",
+        strategy: "Simplified listing with minimal prep and controlled showings",
+        timeline: "21-35 days",
+        tradeoff: "Speed",
+        tradeoffExplanation: "By limiting showings to your schedule, you might miss a few early birds, but patient buyers will pay well for a convenient viewing.",
+        pros: ["Strong price", "Low stress", "Limited disruption", "Good buyer pool"],
+        nextSteps: "Let's create a simple but effective selling plan!"
+      },
+
+      // Balanced Market scenarios
+      'speed-price-balanced': {
+        title: "Fast Sale at Fair Value",
+        subtitle: "Strategic pricing wins",
+        description: "Price 3-5% below market and you'll create urgency. In a balanced market, this triggers quick action and often multiple offers that bring you back to market value.",
+        strategy: "MLS listing with competitive pricing and professional presentation",
+        timeline: "14-28 days to offer",
+        tradeoff: "Convenience",
+        tradeoffExplanation: "You'll need to accommodate frequent showings and keep your home in top condition, but it's the path to both speed and good value.",
+        pros: ["Quick sale", "Likely multiple offers", "Fair market price", "Less time on market"],
+        nextSteps: "Let's analyze recent comps and price strategically for fast action!"
+      },
+      'speed-convenience-balanced': {
+        title: "Quick & Easy Sale",
+        subtitle: "Speed without the stress",
+        description: "Cash buyers or a quick-close traditional sale with minimal prep. You'll sell fast without the traditional hassle.",
+        strategy: "Dual approach: cash offers + streamlined MLS listing",
+        timeline: "10-21 days",
+        tradeoff: "Price",
+        tradeoffExplanation: "Expect 10-15% below peak value with cash buyers, or 5-8% below with quick traditional sale. The time and stress you save often makes it worthwhile.",
+        pros: ["Fast certainty", "Low stress", "Minimal prep", "Flexible closing"],
+        nextSteps: "I'll get you both cash offers and a quick-list strategy to compare!"
+      },
+      'price-speed-balanced': {
+        title: "Maximize Value Quickly",
+        subtitle: "Best price in reasonable time",
+        description: "Strong presentation at market value attracts serious buyers. In a balanced market, well-prepared homes stand out and sell faster at better prices.",
+        strategy: "Enhanced listing with staging, repairs, and aggressive marketing",
+        timeline: "21-35 days",
+        tradeoff: "Convenience",
+        tradeoffExplanation: "You'll invest time and energy in preparation and showings, but the ROI in both price and speed makes it worth it.",
+        pros: ["Top market price", "Reasonable timeline", "Quality buyers", "Competitive edge"],
+        nextSteps: "Let's identify the key improvements that'll pay off and market aggressively!"
+      },
+      'price-convenience-balanced': {
+        title: "Strong Price, Low Stress",
+        subtitle: "Good value on your terms",
+        description: "List at market value with a seller-friendly showing schedule. It'll take a bit longer but you'll avoid most of the hassle while getting fair value.",
+        strategy: "Traditional listing with limited, scheduled showings",
+        timeline: "35-60 days",
+        tradeoff: "Speed",
+        tradeoffExplanation: "Restricting showings to specific times means fewer buyers will see it immediately, extending your timeline. But you'll maintain your lifestyle and still get a fair price.",
+        pros: ["Market-rate price", "Your schedule rules", "Less disruption", "Lower stress"],
+        nextSteps: "Let's set up a showing schedule that works for your life!"
+      },
+      'convenience-speed-balanced': {
+        title: "Fast & Simple Path",
+        subtitle: "Quick sale without hassle",
+        description: "Cash sale is your best bet. You'll close in days without repairs, showings, or uncertainty.",
+        strategy: "Direct cash buyer sale",
+        timeline: "7-14 days",
+        tradeoff: "Price",
+        tradeoffExplanation: "Cash buyers typically offer 12-18% below market in balanced conditions, but you'll save on repairs, closing costs, and months of stress.",
+        pros: ["Very fast", "Zero hassle", "As-is sale", "Guaranteed close"],
+        nextSteps: "Let me get you competing cash offers from vetted buyers!"
+      },
+      'convenience-price-balanced': {
+        title: "Easy Process, Fair Value",
+        subtitle: "Good price without much effort",
+        description: "Minimal prep with honest 'as-is' pricing attracts the right buyers. You'll get reasonable value without the traditional hassle.",
+        strategy: "Simplified listing marketed to as-is buyers",
+        timeline: "30-50 days",
+        tradeoff: "Speed",
+        tradeoffExplanation: "The as-is approach attracts a smaller buyer pool, so it'll take longer. But you'll avoid repairs and staging while still getting decent value.",
+        pros: ["Fair price", "Minimal effort", "No major repairs", "Right buyer fit"],
+        nextSteps: "Let's position your home for realistic, as-is buyers!"
+      },
+
+      // Buyer's Market scenarios
+      'speed-price-buyer': {
+        title: "Challenging But Possible",
+        subtitle: "Smart strategy required",
+        description: "Getting both speed and price in a buyer's market is tough but not impossible. Aggressive pricing and incentives can work, but you'll need to be realistic.",
+        strategy: "Competitive pricing (5-8% below comps) with buyer incentives and aggressive marketing",
+        timeline: "30-60 days",
+        tradeoff: "Convenience",
+        tradeoffExplanation: "You'll need to keep your home immaculate and accommodate all showing requests. Even then, expect negotiations and possible concessions.",
+        pros: ["Better than cash buyer", "Some negotiating room", "Traditional sale", "Price control"],
+        nextSteps: "Let's create a competitive package with pricing and incentives that stand out!"
+      },
+      'speed-convenience-buyer': {
+        title: "Cash Sale Is Your Friend",
+        subtitle: "Best option for your goals",
+        description: "In a buyer's market wanting both speed and convenience? Cash buyers are your answer. They're actively looking and will close fast.",
+        strategy: "Direct cash buyer sale with quick close",
+        timeline: "7-14 days",
+        tradeoff: "Price",
+        tradeoffExplanation: "Expect 15-25% below peak market value. But you'll get certainty, speed, and zero hassle - often worth more than waiting months for maybe 10% more.",
+        pros: ["Guaranteed fast sale", "No showings", "As-is accepted", "Zero hassle", "Pick close date"],
+        nextSteps: "This is your best path - let me get you 3+ cash offers to compare!"
+      },
+      'price-speed-buyer': {
+        title: "Price Focus with Realistic Timeline",
+        subtitle: "Maximize value strategically",
+        description: "In a buyer's market, maximizing price takes time. But with excellent presentation and smart pricing, you can do better than most while staying reasonably quick.",
+        strategy: "Premium presentation, competitive pricing, and sustained marketing",
+        timeline: "45-75 days",
+        tradeoff: "Convenience",
+        tradeoffExplanation: "You'll need to invest in improvements, stage beautifully, and accommodate extensive showings. It's work, but necessary for top dollar in this market.",
+        pros: ["Best achievable price", "Quality buyers", "Professional approach", "Competitive advantage"],
+        nextSteps: "Let's make your home the obvious choice in its price range!"
+      },
+      'price-convenience-buyer': {
+        title: "Consider Waiting or Renting",
+        subtitle: "Timing might be better later",
+        description: "Wanting both price and convenience in a buyer's market? Your best move might be waiting 6-12 months for conditions to improve, or converting to a rental.",
+        strategy: "Delay sale until market improves or convert to rental property",
+        timeline: "6-12+ months",
+        tradeoff: "Speed",
+        tradeoffExplanation: "Markets cycle. If you can wait, you'll get better pricing with less effort. Or rent it out for income while building equity until conditions improve.",
+        pros: ["Better future value", "Rental income option", "Market timing", "No pressure sale"],
+        nextSteps: "Let's discuss rental potential and create a timeline strategy!"
+      },
+      'convenience-speed-buyer': {
+        title: "Cash Buyer All Day",
+        subtitle: "Perfect solution for you",
+        description: "This is exactly what cash buyers are for! In a buyer's market, they'll still move quickly and take the property as-is.",
+        strategy: "Multiple cash buyer offers with best terms",
+        timeline: "5-10 days",
+        tradeoff: "Price",
+        tradeoffExplanation: "You'll get 18-25% below peak value, but you'll avoid the painful process of competing in a buyer's market for months.",
+        pros: ["Ultra-fast", "Zero showings", "No repairs", "Guaranteed", "Total convenience"],
+        nextSteps: "Let me connect you with cash buyers immediately!"
+      },
+      'convenience-price-buyer': {
+        title: "Wait for Better Conditions",
+        subtitle: "Patience pays in this market",
+        description: "In a buyer's market, getting both convenience and good price is nearly impossible. Consider renting it out or waiting for the market to shift in 6-12 months.",
+        strategy: "Rent property or wait for market improvement",
+        timeline: "6-12+ months",
+        tradeoff: "Speed",
+        tradeoffExplanation: "If you list now with minimal effort in a buyer's market, you'll get lowball offers. Better to wait or rent for income until conditions improve.",
+        pros: ["Higher future value", "Rental income", "Avoid bad timing", "Strategic patience"],
+        nextSteps: "Let's explore rental options and track market conditions together!"
+      },
+    };
+    
+    // Assign the scenarios object to the constant used in the script
+    Object.assign(MARKET_SCENARIOS, scenarios);
+
+</script>
+
 </body>
 </html>

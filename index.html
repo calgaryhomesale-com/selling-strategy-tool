@@ -4,426 +4,471 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Selling Strategy Finder</title>
-    <style>
-        /* Basic Reset and Structure */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f7f9;
-        }
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        .subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 25px;
-        }
-        
-        /* --- PROGRESS BAR STYLES --- */
-        .progress-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            padding: 0 10px;
-        }
-        .step-indicator {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #ccc;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            position: relative;
-            z-index: 10;
-            transition: background-color 0.3s;
-        }
-        .step-indicator.active {
-            background-color: #1a73e8;
-        }
-        .step-indicator.completed {
-            background-color: #00897b;
-        }
-        .progress-line {
-            position: absolute;
-            top: 45px;
-            left: 5%;
-            right: 5%;
-            height: 4px;
-            background-color: #e0e0e0;
-            z-index: 5;
-        }
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background-color: #1a73e8;
-            transition: width 0.5s;
-        }
-        
-        /* --- STEP SECTION STYLES --- */
-        .step-section {
-            padding: 20px 0;
-            border-radius: 8px;
-            min-height: 250px; 
-        }
-        .step-section h2 {
-            margin-top: 0;
-            color: #1a73e8;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            text-align: center;
-        }
-
-        /* --- Input Styles (General) --- */
-        .option-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .option-group label {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border: 2px solid #ccc;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 500;
-        }
-        .option-group input[type="radio"] {
-            margin-right: 15px;
-            accent-color: #1a73e8;
-            transform: scale(1.2);
-        }
-        .option-group label:hover {
-            border-color: #8ab4f8;
-        }
-        .option-group input:checked + span {
-            font-weight: bold;
-            color: #1a73e8;
-        }
-        .option-group input:checked ~ label {
-             border-color: #1a73e8;
-             background-color: #e8f0fe;
-        }
-        #cityInput, #propertyTypeSelect {
-            padding: 10px; 
-            border: 1px solid #ccc; 
-            border-radius: 4px; 
-            margin-top: 5px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
-        /* --- NEW STYLES: Age/Condition Buttons (Step 3) --- */
-        .label-button-group {
-            display: grid;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-        #age-options {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        .label-button-group label {
-            text-align: center;
-            justify-content: center;
-            padding: 15px 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            transition: all 0.2s;
-            background-color: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            font-size: 1.1em;
-        }
-        .label-button-group input[type="radio"] {
-            display: none; 
-        }
-        .label-button-group input:checked + span {
-            font-weight: bold;
-            color: #1a73e8;
-        }
-        .label-button-group input:checked ~ label {
-            border-color: #1a73e8;
-            background-color: #e8f0fe;
-            box-shadow: 0 0 5px rgba(26, 115, 232, 0.5);
-        }
-        
-        /* --- Navigation/Result Styles --- */
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            gap: 15px;
-        }
-        .nav-button {
-            padding: 15px;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            flex: 1;
-        }
-        #prevStepBtn {
-            background-color: #666;
-            flex: 0.5;
-        }
-        #prevStepBtn:hover {
-            background-color: #444;
-        }
-        #nextStepBtn, #findStrategyBtn {
-            background-color: #1a73e8;
-        }
-        #nextStepBtn:hover:not(:disabled), #findStrategyBtn:hover:not(:disabled) {
-            background-color: #174ea6;
-        }
-        .nav-button:disabled {
-            background-color: #a0c3ff;
-            cursor: not-allowed;
-        }
-        
-        /* --- GOOGLE PROMPT STYLES (Step 5) --- */
-        #google-prompt-display {
-            background-color: #fff3e0; 
-            border: 3px solid #ff9800; 
-            padding: 20px; 
-            border-radius: 10px; 
-            margin-bottom: 25px;
-            font-size: 1.1em;
-            font-weight: bold;
-            display: none; 
-            text-align: center;
-        }
-        #google-prompt-display a {
-            font-size: 1.2em;
-            margin-top: 10px;
-            display: inline-block;
-        }
-        #profile-display {
-            background-color: #e8f0fe;
-            border: 2px solid #1a73e8;
-            padding: 15px;
-            border-radius: 8px;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 15px;
-        }
-        .recommended-method {
-            padding: 20px;
-            border: 3px solid #00897b;
-            border-radius: 8px;
-            background-color: #e0f2f1;
-            font-size: 1.3em;
-            font-weight: bold;
-            text-align: center;
-            color: #004d40;
-            margin-top: 20px;
-        }
-        .not-optimal-method {
-            margin-bottom: 20px; 
-            padding: 15px; 
-            border: 1px solid #ffcc80; 
-            border-radius: 8px; 
-            background-color: #fff3e0;
-        }
-        .pros-list {
-            list-style: square;
-            margin-left: 20px;
-            color: #00897b;
-        }
-    </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>🏠 Home Selling Strategy Finder</h1>
-    <p class="subtitle">Find your perfect strategy in just a few steps.</p>
+<div id="selling-strategy-tool-wrapper">
     
-    <div style="position: relative;">
-        <div class="progress-line"><div id="progress-fill" class="progress-fill"></div></div>
-        <div class="progress-container" id="progress-steps">
-            <div class="step-indicator" data-step="1">1</div>
-            <div class="step-indicator" data-step="2">2</div>
-            <div class="step-indicator" data-step="3">3</div>
-            <div class="step-indicator" data-step="4">4</div>
-            <div class="step-indicator" data-step="5">5</div>
-        </div>
-    </div>
-    
-    <div id="input-form">
+    <div class="container">
+        <h1>🏠 Home Selling Strategy Finder</h1>
+        <p class="subtitle">Find your perfect strategy in just a few steps.</p>
         
-        <div class="step-section" id="step-1">
-            <h2>Step 1: What is your **#1 most important goal**?</h2>
-            <div class="option-group" id="priority1-options">
-                <label>
-                    <input type="radio" name="firstPriority" value="speed" required>
-                    <span>Speed (I need to sell quickly)</span>
-                </label>
-                <label>
-                    <input type="radio" name="firstPriority" value="convenience">
-                    <span>Convenience (I want a hassle-free, As-Is sale)</span>
-                </label>
-                <label>
-                    <input type="radio" name="firstPriority" value="price">
-                    <span>Price (I want maximum value/profit)</span>
-                </label>
-            </div>
-        </div>
-
-        <div class="step-section" id="step-2" style="display: none;">
-            <h2>Step 2: What is your #2 priority?</h2>
-            <p style="color: #c00; font-weight: bold;">(You cannot choose your first priority again)</p>
-            <div class="option-group" id="priority2-options">
-                </div>
-        </div>
-        
-        <div class="step-section" id="step-3" style="display: none;">
-            <h2>Step 3: Tell us about your property's condition.</h2>
-
-            <h3 style="margin-bottom: 10px; font-size: 1.3em;">Property Age:</h3>
-            <div class="label-button-group" id="age-options">
-                <label>
-                    <input type="radio" name="propertyAge" value="new" required>
-                    <span>New (0-10 yrs)</span>
-                </label>
-                <label>
-                    <input type="radio" name="propertyAge" value="modern">
-                    <span>Modern (10-25 yrs)</span>
-                </label>
-                <label>
-                    <input type="radio" name="propertyAge" value="mature">
-                    <span>Mature (25-50 yrs)</span>
-                </label>
-                <label>
-                    <input type="radio" name="propertyAge" value="older">
-                    <span>Older (50+ yrs)</span>
-                </label>
-            </div>
-
-            <h3 style="margin-bottom: 10px; font-size: 1.3em;">Property Condition:</h3>
-            <div class="option-group" id="condition-options">
-                <label>
-                    <input type="radio" name="propertyCondition" value="move-in" required>
-                    <span>✨ Move-in Ready</span>
-                </label>
-                <label>
-                    <input type="radio" name="propertyCondition" value="good-shape">
-                    <span>👍 Good Shape (Minor repairs, some wear and tear)</span>
-                </label>
-                <label>
-                    <input type="radio" name="propertyCondition" value="needs-work">
-                    <span>🔨 Needs Work (Upgrades/major repairs needed)</span>
-                </label>
-                <label>
-                    <input type="radio" name="propertyCondition" value="tear-down">
-                    <span>🚧 Tear-down (Major structural/Land Value)</span>
-                </label>
-            </div>
-        </div>
-
-        <div class="step-section" id="step-4" style="display: none;">
-            <h2>Step 4: Location and Buyer Profile.</h2>
-            <div class="option-group" style="gap: 25px;">
-                
-                <div style="display: flex; flex-direction: column; gap: 5px;">
-                    <span style="font-weight: bold;">What city is the property located in?</span>
-                    <input type="text" id="cityInput" name="city" required value="Calgary" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                </div>
-                
-                <div style="display: flex; flex-direction: column; gap: 5px;">
-                    <span style="font-weight: bold;">What is the property type?</span>
-                    <select id="propertyTypeSelect" name="propertyType" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                        <option value="" disabled selected>Select Property Type</option>
-                        <option value="detached home">Detached Home</option>
-                        <option value="attached home">Attached Home (Duplex/Townhouse)</option>
-                        <option value="apartment condo">Apartment Condo</option>
-                        <option value="acreage">Acreage/Rural Property</option>
-                    </select>
-                </div>
-                
-                <div style="display: flex; flex-direction: column; gap: 5px;">
-                    <span style="font-weight: bold;">Determined Buyer Profile:</span>
-                    <div id="profile-display">
-                        </div>
-                    <p style="font-size: 0.9em; color: #666; margin-top: 5px;">Based on your condition (Step 3), the system has determined the most likely buyer for your property type.</p>
-                </div>
-                
-                <input type="hidden" id="propertyProfileHidden" name="propertyProfile" value="">
-                
+        <div style="position: relative;">
+            <div class="progress-line"><div id="progress-fill" class="progress-fill"></div></div>
+            <div class="progress-container" id="progress-steps">
+                <div class="step-indicator" data-step="1">1</div>
+                <div class="step-indicator" data-step="2">2</div>
+                <div class="step-indicator" data-step="3">3</div>
+                <div class="step-indicator" data-step="4">4</div>
+                <div class="step-indicator" data-step="5">5</div>
             </div>
         </div>
         
-        <div class="step-section" id="step-5" style="display: none;">
-            <h2>Step 5: Determine Your Market Condition</h2>
-            <p style="font-size: 1.1em; font-weight: bold;">Action Required:</p>
-            <p>To ensure the best advice, you **must** check the **Months of Supply** for your property type.</p>
+        <div id="input-form">
             
-            <div id="google-prompt-display">
+            <div class="step-section" id="step-1">
+                <h2>Step 1: What is your **#1 most important goal**?</h2>
+                <div class="option-group" id="priority1-options">
+                    <label>
+                        <input type="radio" name="firstPriority" value="speed" required>
+                        <span>Speed (I need to sell quickly)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="firstPriority" value="convenience">
+                        <span>Convenience (I want a hassle-free, As-Is sale)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="firstPriority" value="price">
+                        <span>Price (I want maximum value/profit)</span>
+                    </label>
                 </div>
+            </div>
+
+            <div class="step-section" id="step-2" style="display: none;">
+                <h2>Step 2: What is your #2 priority?</h2>
+                <p style="color: #c00; font-weight: bold;">(You cannot choose your first priority again)</p>
+                <div class="option-group" id="priority2-options">
+                    </div>
+            </div>
             
-            <p style="font-weight: bold; margin-top: 25px;">Select the Market Type based on your search result:</p>
-            <div class="option-group" id="market-options">
-                <label>
-                    <input type="radio" name="marketType" value="seller" required>
-                    <span>Seller's Market (Less than 3 months of supply)</span>
-                </label>
-                <label>
-                    <input type="radio" name="marketType" value="balanced">
-                    <span>Balanced Market (3 to 4 months of supply)</span>
-                </label>
-                <label>
-                    <input type="radio" name="marketType" value="buyer" >
-                    <span>Buyer's Market (More than 4 months of supply)</span>
-                </label>
+            <div class="step-section" id="step-3" style="display: none;">
+                <h2>Step 3: Tell us about your property's condition.</h2>
+
+                <h3 style="margin-bottom: 10px; font-size: 1.3em;">Property Age:</h3>
+                <div class="label-button-group" id="age-options">
+                    <label>
+                        <input type="radio" name="propertyAge" value="new" required>
+                        <span>New (0-10 yrs)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="propertyAge" value="modern">
+                        <span>Modern (10-25 yrs)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="propertyAge" value="mature">
+                        <span>Mature (25-50 yrs)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="propertyAge" value="older">
+                        <span>Older (50+ yrs)</span>
+                    </label>
+                </div>
+
+                <h3 style="margin-bottom: 10px; font-size: 1.3em;">Property Condition:</h3>
+                <div class="option-group" id="condition-options">
+                    <label>
+                        <input type="radio" name="propertyCondition" value="move-in" required>
+                        <span>✨ Move-in Ready</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="propertyCondition" value="good-shape">
+                        <span>👍 Good Shape (Minor repairs, some wear and tear)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="propertyCondition" value="needs-work">
+                        <span>🔨 Needs Work (Upgrades/major repairs needed)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="propertyCondition" value="tear-down">
+                        <span>🚧 Tear-down (Major structural/Land Value)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="step-section" id="step-4" style="display: none;">
+                <h2>Step 4: Location and Buyer Profile.</h2>
+                <div class="option-group" style="gap: 25px;">
+                    
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <span style="font-weight: bold;">What city is the property located in?</span>
+                        <input type="text" id="cityInput" name="city" required value="Calgary" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <span style="font-weight: bold;">What is the property type?</span>
+                        <select id="propertyTypeSelect" name="propertyType" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                            <option value="" disabled selected>Select Property Type</option>
+                            <option value="detached home">Detached Home</option>
+                            <option value="attached home">Attached Home (Duplex/Townhouse)</option>
+                            <option value="apartment condo">Apartment Condo</option>
+                            <option value="acreage">Acreage/Rural Property</option>
+                        </select>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <span style="font-weight: bold;">Determined Buyer Profile:</span>
+                        <div id="profile-display">
+                            </div>
+                        <p style="font-size: 0.9em; color: #666; margin-top: 5px;">Based on your condition (Step 3), the system has determined the most likely buyer for your property type.</p>
+                    </div>
+                    
+                    <input type="hidden" id="propertyProfileHidden" name="propertyProfile" value="">
+                    
+                </div>
+            </div>
+            
+            <div class="step-section" id="step-5" style="display: none;">
+                <h2>Step 5: Determine Your Market Condition</h2>
+                <p style="font-size: 1.1em; font-weight: bold;">Action Required:</p>
+                <p>To ensure the best advice, you **must** check the **Months of Supply** for your property type.</p>
+                
+                <div id="google-prompt-display">
+                    </div>
+                
+                <p style="font-weight: bold; margin-top: 25px;">Select the Market Type based on your search result:</p>
+                <div class="option-group" id="market-options">
+                    <label>
+                        <input type="radio" name="marketType" value="seller" required>
+                        <span>Seller's Market (Less than 3 months of supply)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="marketType" value="balanced">
+                        <span>Balanced Market (3 to 4 months of supply)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="marketType" value="buyer" >
+                        <span>Buyer's Market (More than 4 months of supply)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="navigation" id="navigation-buttons">
+                <button id="prevStepBtn" class="nav-button" style="display: none;">← Previous</button>
+                <button id="nextStepBtn" class="nav-button">Continue →</button>
+                <button id="findStrategyBtn" class="nav-button" style="display: none;" disabled>Find My Strategy</button>
             </div>
         </div>
 
-        <div class="navigation" id="navigation-buttons">
-            <button id="prevStepBtn" class="nav-button" style="display: none;">← Previous</button>
-            <button id="nextStepBtn" class="nav-button">Continue →</button>
-            <button id="findStrategyBtn" class="nav-button" style="display: none;" disabled>Find My Strategy</button>
-        </div>
-    </div>
+        <div id="result" style="display: none;">
+            </div>
 
-    <div id="result" style="display: none;">
-        </div>
+    </div>
 
 </div>
+
+<style>
+    /* * All styles are prefixed with #selling-strategy-tool-wrapper 
+     * to prevent interference with Carrot's global styles.
+     */
+
+    #selling-strategy-tool-wrapper * {
+        box-sizing: border-box; /* Important isolation rule */
+    }
+    
+    #selling-strategy-tool-wrapper .container {
+        font-family: Arial, sans-serif;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+    }
+    #selling-strategy-tool-wrapper h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 5px;
+    }
+    #selling-strategy-tool-wrapper .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 25px;
+    }
+
+    /* --- PROGRESS BAR STYLES --- */
+    #selling-strategy-tool-wrapper .progress-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding: 0 10px;
+        position: relative;
+    }
+    #selling-strategy-tool-wrapper .step-indicator {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #ccc;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        position: relative;
+        z-index: 10;
+        transition: background-color 0.3s;
+    }
+    #selling-strategy-tool-wrapper .step-indicator.active {
+        background-color: #1a73e8;
+    }
+    #selling-strategy-tool-wrapper .step-indicator.completed {
+        background-color: #00897b;
+    }
+    #selling-strategy-tool-wrapper .progress-line {
+        position: absolute;
+        top: 45px;
+        left: 5%;
+        right: 5%;
+        height: 4px;
+        background-color: #e0e0e0;
+        z-index: 5;
+    }
+    #selling-strategy-tool-wrapper .progress-fill {
+        height: 100%;
+        width: 0%;
+        background-color: #1a73e8;
+        transition: width 0.5s;
+    }
+
+    /* --- STEP SECTION STYLES --- */
+    #selling-strategy-tool-wrapper .step-section {
+        padding: 20px 0;
+        border-radius: 8px;
+        min-height: 250px; 
+    }
+    #selling-strategy-tool-wrapper .step-section h2 {
+        margin-top: 0;
+        color: #1a73e8;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    /* --- Input Styles (General) --- */
+    #selling-strategy-tool-wrapper .option-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    #selling-strategy-tool-wrapper .option-group label {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-weight: 500;
+    }
+    #selling-strategy-tool-wrapper .option-group input[type="radio"] {
+        margin-right: 15px;
+        accent-color: #1a73e8;
+        transform: scale(1.2);
+    }
+    #selling-strategy-tool-wrapper .option-group label:hover {
+        border-color: #8ab4f8;
+    }
+    #selling-strategy-tool-wrapper .option-group input:checked + span {
+        font-weight: bold;
+        color: #1a73e8;
+    }
+    #selling-strategy-tool-wrapper .option-group input:checked ~ label {
+         border-color: #1a73e8;
+         background-color: #e8f0fe;
+    }
+    #selling-strategy-tool-wrapper #cityInput, #selling-strategy-tool-wrapper #propertyTypeSelect {
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        border-radius: 4px; 
+        margin-top: 5px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* --- Age/Condition Buttons (Step 3) --- */
+    #selling-strategy-tool-wrapper .label-button-group {
+        display: grid;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+    #selling-strategy-tool-wrapper #age-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #selling-strategy-tool-wrapper .label-button-group label {
+        text-align: center;
+        justify-content: center;
+        padding: 15px 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        transition: all 0.2s;
+        background-color: white;
+        box-shadow: 0 0 5px rgba(0,0,0,0.05);
+        font-size: 1.1em;
+    }
+    #selling-strategy-tool-wrapper .label-button-group input[type="radio"] {
+        display: none; 
+    }
+    #selling-strategy-tool-wrapper .label-button-group input:checked + span {
+        font-weight: bold;
+        color: #1a73e8;
+    }
+    #selling-strategy-tool-wrapper .label-button-group input:checked ~ label {
+        border-color: #1a73e8;
+        background-color: #e8f0fe;
+        box-shadow: 0 0 5px rgba(26, 115, 232, 0.5);
+    }
+
+    /* --- Navigation/Result Styles --- */
+    #selling-strategy-tool-wrapper .navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        gap: 15px;
+    }
+    #selling-strategy-tool-wrapper .nav-button {
+        padding: 15px;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        flex: 1;
+    }
+    #selling-strategy-tool-wrapper #prevStepBtn {
+        background-color: #666;
+        flex: 0.5;
+    }
+    #selling-strategy-tool-wrapper #prevStepBtn:hover {
+        background-color: #444;
+    }
+    #selling-strategy-tool-wrapper #nextStepBtn, #selling-strategy-tool-wrapper #findStrategyBtn {
+        background-color: #1a73e8;
+    }
+    #selling-strategy-tool-wrapper #nextStepBtn:hover:not(:disabled), #selling-strategy-tool-wrapper #findStrategyBtn:hover:not(:disabled) {
+        background-color: #174ea6;
+    }
+    #selling-strategy-tool-wrapper .nav-button:disabled {
+        background-color: #a0c3ff;
+        cursor: not-allowed;
+    }
+
+    /* --- GOOGLE PROMPT STYLES (Step 5) --- */
+    #selling-strategy-tool-wrapper #google-prompt-display {
+        background-color: #fff3e0; 
+        border: 3px solid #ff9800; 
+        padding: 20px; 
+        border-radius: 10px; 
+        margin-bottom: 25px;
+        font-size: 1.1em;
+        font-weight: bold;
+        display: none; 
+        text-align: center;
+    }
+    #selling-strategy-tool-wrapper #google-prompt-display a {
+        font-size: 1.2em;
+        margin-top: 10px;
+        display: inline-block;
+    }
+    #selling-strategy-tool-wrapper #profile-display {
+        background-color: #e8f0fe;
+        border: 2px solid #1a73e8;
+        padding: 15px;
+        border-radius: 8px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 15px;
+    }
+    #selling-strategy-tool-wrapper .recommended-method {
+        padding: 20px;
+        border: 3px solid #00897b;
+        border-radius: 8px;
+        background-color: #e0f2f1;
+        font-size: 1.3em;
+        font-weight: bold;
+        text-align: center;
+        color: #004d40;
+        margin-top: 20px;
+    }
+    #selling-strategy-tool-wrapper .pros-list {
+        list-style: square;
+        margin-left: 20px;
+        color: #00897b;
+    }
+    #selling-strategy-tool-wrapper .cons-list {
+        list-style: disc;
+        margin-left: 20px;
+        color: #c00;
+    }
+    #selling-strategy-tool-wrapper .method-card {
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+    #selling-strategy-tool-wrapper .method-card.recommended {
+        border: 3px solid #00897b;
+        background-color: #e0f2f1;
+    }
+    #selling-strategy-tool-wrapper .method-card.alternative {
+        border: 1px solid #ffcc80;
+        background-color: #fff3e0;
+    }
+</style>
+
 
 <script>
     // --- Global Data Objects ---
     const SELLING_METHODS = {
         'realtor': {
             name: "Realtor Listing (Traditional Sale)",
-            pros: ["Highest average sale price", "Maximum market exposure (MLS)", "Agent handles all showings and paperwork", "Strong negotiating power"],
-            cons: ["Requires commission (approx 5-7%)", "Must keep home show-ready", "Process can be lengthy"],
+            pros: [
+                "Highest potential sale price", 
+                "Maximum market exposure (MLS, marketing)", 
+                "Agent handles all showings, paperwork, and negotiation", 
+                "Reduced personal effort and legal risk"
+            ],
+            cons: [
+                "Requires commission (approx 5-7%)", 
+                "Must keep home show-ready for extended periods", 
+                "Timeline is dependent on buyer financing and market absorption"
+            ],
         },
         'fsbo': {
             name: "For Sale By Owner (FSBO)",
-            pros: ["No commission paid (if successful)", "Full control over schedule and negotiation"],
-            cons: ["Statistically sells for less (3-15% lower)", "Requires significant personal time and effort", "High legal/disclosure risk", "Limited marketing reach"],
+            pros: [
+                "No listing agent commission paid (if successful)", 
+                "Full control over pricing and showing schedule", 
+                "Potential for maximum profit (if seller has market expertise)"
+            ],
+            cons: [
+                "Statistically sells for less (3-15% lower) than agent-assisted sales", 
+                "Requires significant personal time, effort, and high legal/disclosure risk", 
+                "Limited marketing reach and difficulty negotiating against buyer agents"
+            ],
         },
         'cash': {
             name: "Private Cash Sale (Investor/iBuyer)",
-            pros: ["Fastest closing (often under 2 weeks)", "Zero repairs, sell as-is", "Absolute certainty and convenience"],
-            cons: ["Significantly lower sale price (10-25% below market)", "No exposure to the open market", "Risk of dealing with unvetted investors"],
+            pros: [
+                "Fastest closing (often under 2 weeks)", 
+                "Zero repairs, sell As-Is (ultimate convenience)", 
+                "Absolute certainty and no financing risk"
+            ],
+            cons: [
+                "Significantly lower sale price (10-25% below market is common)", 
+                "No exposure to the open retail market", 
+                "Risk of dealing with unvetted investors or low-ball offers"
+            ]
         }
     };
 
@@ -432,16 +477,16 @@
         'speed-price-seller-retail': { method: 'realtor', title: "Fast Sale at Top Dollar", subtitle: "Listing at a sharp market price triggers immediate bidding wars.", strategy: "Traditional MLS with staging and excellent photos.", timeline: "7-14 days to offer.", tradeoff: "Low Convenience" },
         'speed-convenience-seller-retail': { method: 'cash', title: "Guaranteed Quick Exit with Ease", subtitle: "Cash sale for speed and convenience; saves time but costs price.", strategy: "Private cash offer from vetted investors. Sell as-is with flexible closing.", timeline: "7-14 days.", tradeoff: "Price Loss (10-15%)" },
         'price-speed-seller-retail': { method: 'realtor', title: "Maximum Value Quickly", subtitle: "Premium listing with staging ensures the highest offers come fast.", strategy: "Premium MLS listing with intense, short marketing period.", timeline: "14-28 days to offer.", tradeoff: "Low Convenience" },
-        'price-convenience-seller-retail': { method: 'fsbo', title: "FSBO: Premium Price, Low Commission", subtitle: "Your best chance for successful FSBO—maximize profit, minimize hassle (by selling AS-IS) but requires seller effort.", strategy: "Self-listing on platforms, hire lawyer, manage all negotiations personally.", timeline: "30-60 days.", tradeoff: "High Personal Effort/Legal Risk" },
+        'price-convenience-seller-retail': { method: 'realtor', title: "Premium Price, Controlled Convenience", subtitle: "Listing with a Realtor for maximum profit, but restricting showings to your schedule.", strategy: "Traditional MLS with tightly controlled showing windows.", timeline: "30-60 days.", tradeoff: "High Personal Effort/Risk" },
         'convenience-speed-seller-retail': { method: 'cash', title: "Fastest, Easiest Sale Guaranteed", subtitle: "Sell to an iBuyer/investor to meet your tight deadline and minimize stress.", strategy: "Private cash offer from vetted investors. Sell as-is with flexible closing.", timeline: "7-14 days.", tradeoff: "Significant Price Loss (10-15%)" },
-        'convenience-price-seller-retail': { method: 'fsbo', title: "FSBO: Low Commission and High Price Aim", subtitle: "Perfect market for a commission-free sale. Requires diligence to maximize price.", strategy: "Self-listing with limited, controlled showings on your schedule.", timeline: "45-75 days.", tradeoff: "High Effort/Risk of Undervaluing" },
+        'convenience-price-seller-retail': { method: 'realtor', title: "Max Convenience, Max Price Aim", subtitle: "Listing with an agent to handle the work and achieve maximum price, even if it takes longer.", strategy: "Traditional MLS with agent handling all complexity. Patience is key.", timeline: "45-75 days.", tradeoff: "Speed" },
 
-        'speed-price-seller-investor': { method: 'cash', title: "Ideal Investor Target", subtitle: "Price slightly below land value to trigger a bidding war among developers/investors.", strategy: "Targeted direct outreach to developers and immediate cash sale listing.", timeline: "5-10 days.", tradeoff: "Commission Cost (If Agent Used)" },
-        'speed-convenience-seller-investor': { method: 'cash', title: "As-Is, Ultra-Fast Exit", subtitle: "The market will absorb this quickly. Cash sale is your fastest, easiest solution.", strategy: "Private cash offer, sell as-is with no showings or repairs.", timeline: "5-10 days.", tradeoff: "Guaranteed Price Loss (15-20%)" },
-        'price-speed-seller-investor': { method: 'realtor', title: "Highest Investor Price, Fast", subtitle: "Aggressively price at the top of land value and list with an expert in investment sales.", strategy: "MLS listing clearly highlighting development potential and lot size.", timeline: "14-28 days.", tradeoff: "Low Convenience" },
-        'price-convenience-seller-investor': { method: 'fsbo', title: "FSBO: Max Price, Minimal Effort (Investor Focused)", subtitle: "Best case for FSBO: buyer cares only about numbers. High chance for commission savings.", strategy: "Self-list as 'Land Value Only' with minimal effort on presentation.", timeline: "45-75 days.", tradeoff: "High Risk of Undervaluing" },
+        'speed-price-seller-investor': { method: 'realtor', title: "Highest Investor Price, Fast", subtitle: "Aggressively price at the top of land value and list with an expert in investment sales.", strategy: "MLS listing clearly highlighting development potential and lot size.", timeline: "14-28 days to offer.", tradeoff: "Low Convenience" },
+        'speed-convenience-seller-investor': { method: 'cash', title: "As-Is, Ultra-Fast Exit", subtitle: "The market will absorb this quickly. Cash sale is your fastest, easiest solution.", strategy: "Private cash offer from vetted developers/investors. Sell as-is with no showings or repairs.", timeline: "5-10 days.", tradeoff: "Guaranteed Price Loss (15-20%)" },
+        'price-speed-seller-investor': { method: 'realtor', title: "Highest Investor Price, Fast", subtitle: "Aggressively price at the top of land value and list with an expert in investment sales.", strategy: "MLS listing clearly highlighting development potential and lot size.", timeline: "14-28 days to offer.", tradeoff: "Low Convenience" },
+        'price-convenience-seller-investor': { method: 'realtor', title: "Max Price, Agent Handles Details", subtitle: "Use an agent to secure the best price and manage the hassle. FSBO is too high-effort here.", strategy: "MLS listing with tightly controlled access for investor viewings.", timeline: "75+ days.", tradeoff: "Speed/Effort" },
         'convenience-speed-seller-investor': { method: 'cash', title: "Fastest As-Is Sale", subtitle: "Cash investors are ready to close instantly in this market.", strategy: "Private cash offer from vetted developers/investors.", timeline: "7-14 days.", tradeoff: "Guaranteed Price Loss (15-20%)" },
-        'convenience-price-seller-investor': { method: 'fsbo', title: "FSBO: Low Commission, Top Investor Price Aim", subtitle: "Maximize price and convenience (no agent/showings). Must target investors directly.", strategy: "Self-list, price aggressively based on future potential, not current condition.", timeline: "45-75 days.", tradeoff: "High Effort/Risk of Undervaluing" },
+        'convenience-price-seller-investor': { method: 'realtor', title: "Max Convenience, Fair Investor Price", subtitle: "Agent handles marketing while you control the schedule. Recommended over risky FSBO.", strategy: "MLS listing with tightly controlled access for investor viewings.", timeline: "45-75 days.", tradeoff: "Speed" },
 
         'speed-price-balanced-retail': { method: 'realtor', title: "Aggressive Pricing Strategy", subtitle: "Price slightly below market value to generate urgency and multiple offers.", strategy: "Traditional MLS with staging. Must be flawless and priced to move.", timeline: "14-28 days.", tradeoff: "Low Convenience" },
         'speed-convenience-balanced-retail': { method: 'cash', title: "As-Is, Quick Exit", subtitle: "Only a cash offer will guarantee speed and zero hassle in this market.", strategy: "Private cash offer from investor/iBuyer. Sell as-is.", timeline: "10-21 days.", tradeoff: "Significant Price Loss (15-20%)" },
@@ -455,7 +500,7 @@
         'price-speed-balanced-investor': { method: 'realtor', title: "Maximize Investor Value, Strategic Pricing", subtitle: "List with a specialized agent to market the opportunity correctly.", strategy: "MLS listing highlighting development/rental potential, priced at top land value.", timeline: "28-45 days.", tradeoff: "Low Convenience" },
         'price-convenience-balanced-investor': { method: 'realtor', title: "Max Price, Agent Handles Details", subtitle: "Use an agent to secure the best price and manage the hassle. FSBO is too high-effort here.", strategy: "MLS listing with tightly controlled access for investor viewings.", timeline: "75+ days.", tradeoff: "Speed/Effort" },
         'convenience-speed-balanced-investor': { method: 'cash', title: "Fastest As-Is Sale", subtitle: "The quickest, zero-hassle path is a guaranteed cash investor sale.", strategy: "Private cash offer with no contingencies and a fast close.", timeline: "10-21 days.", tradeoff: "Significant Price Loss (15-20%)" },
-        'convenience-price-balanced-investor': { method: 'realtor', title: "Max Convenience, Fair Investor Price", subtitle: "Agent handles marketing while you control the schedule. Recommended over risky FSBO.", strategy: "MLS listing with tightly controlled access for investor viewings.", timeline: "45-75 days.", tradeoff: "Speed" },
+        'convenience-price-balanced-investor': { method: 'realtor', title: "Convenience/Price Balance (Investor)", subtitle: "Agent handles marketing while you control the schedule. Recommended over risky FSBO.", strategy: "MLS listing with tightly controlled access for investor viewings.", timeline: "45-75 days.", tradeoff: "Speed" },
 
         'speed-price-buyer-retail': { method: 'realtor', title: "Aggressive Concessions Strategy", subtitle: "Price well below market (8-12% lower) and offer buyer incentives to trigger speed.", strategy: "Traditional MLS with massive price reduction and incentives (rate buydowns, closing costs).", timeline: "45-75 days.", tradeoff: "Significant Price Loss (Necessary)" },
         'speed-convenience-buyer-retail': { method: 'cash', title: "As-Is, Guaranteed Exit", subtitle: "The only way to guarantee speed and zero hassle is a private cash sale in this market.", strategy: "Private cash offer. Sell as-is with minimal negotiation.", timeline: "14-28 days.", tradeoff: "Major Price Loss (20-30%)" },
@@ -464,7 +509,7 @@
         'convenience-speed-buyer-retail': { method: 'cash', title: "Easiest Guaranteed Exit", subtitle: "Sell to an investor for the fastest, lowest-stress process. A strong recommendation.", strategy: "Private cash offer, sell as-is with quick close and no showings.", timeline: "14-28 days.", tradeoff: "Major Price Loss (20-30%)" },
         'convenience-price-buyer-retail': { method: 'realtor', title: "Max Convenience: Wait or Rent", subtitle: "Avoid listing now. This market will require heavy effort or steep price cuts to sell.", strategy: "Wait for market conditions to improve or rent property until conditions stabilize.", timeline: "6-12+ months.", tradeoff: "Time and Price Loss" },
 
-        'speed-price-buyer-investor': { method: 'cash', title: "Direct Investor Target", subtitle: "Price must be extremely attractive to investors for a quick sale.", strategy: "Price aggressively (10-15% below land value) and target developers directly.", timeline: "28-45 days.", tradeoff: "Significant Price Loss (Necessary)" },
+        'speed-price-buyer-investor': { method: 'realtor', title: "Aggressive Investor Pricing", subtitle: "Price must be extremely attractive to investors for a quick sale, listed with an agent.", strategy: "MLS listing highlighting distressed status. Price aggressively (10-15% below land value).", timeline: "28-45 days.", tradeoff: "Significant Price Loss (Necessary)" },
         'speed-convenience-buyer-investor': { method: 'cash', title: "Fastest, Zero-Hassle Sale", subtitle: "The most recommended path: sell to a cash investor for speed and certainty.", strategy: "Private cash offer with zero contingencies, sell as-is.", timeline: "14-28 days.", tradeoff: "Major Price Loss (20-30%)" },
         'price-speed-buyer-investor': { method: 'realtor', title: "Maximize Investor Price, Long Term View", subtitle: "Achieving top investor price requires a long timeline and detailed marketing of the asset.", strategy: "MLS listing highlighting detailed cash flow/development projections.", timeline: "75+ days.", tradeoff: "Low Convenience" },
         'price-convenience-buyer-investor': { method: 'realtor', title: "Price Focus: Wait for Market Turn", subtitle: "Do not sell now if price is primary. The market is too weak for maximum value and low effort.", strategy: "Delay sale 6-12 months or convert to rental until market recovers.", timeline: "6-12+ months.", tradeoff: "Speed" },
@@ -474,37 +519,42 @@
 
 
     // --- DOM Elements & State ---
+    const toolWrapper = document.getElementById('selling-strategy-tool-wrapper');
+    if (!toolWrapper) {
+        console.error("Tool wrapper not found. Script cannot initialize.");
+    }
+
     const stepContainers = [
-        document.getElementById('step-1'),
-        document.getElementById('step-2'),
-        document.getElementById('step-3'),
-        document.getElementById('step-4'),
-        document.getElementById('step-5')
+        toolWrapper.querySelector('#step-1'),
+        toolWrapper.querySelector('#step-2'),
+        toolWrapper.querySelector('#step-3'),
+        toolWrapper.querySelector('#step-4'),
+        toolWrapper.querySelector('#step-5')
     ];
-    const resultDiv = document.getElementById('result');
-    const prevStepBtn = document.getElementById('prevStepBtn');
-    const nextStepBtn = document.getElementById('nextStepBtn');
-    const findStrategyBtn = document.getElementById('findStrategyBtn');
-    const progressIndicators = document.querySelectorAll('.step-indicator');
-    const progressFill = document.getElementById('progress-fill');
+    const resultDiv = toolWrapper.querySelector('#result');
+    const prevStepBtn = toolWrapper.querySelector('#prevStepBtn');
+    const nextStepBtn = toolWrapper.querySelector('#nextStepBtn');
+    const findStrategyBtn = toolWrapper.querySelector('#findStrategyBtn');
+    const progressIndicators = toolWrapper.querySelectorAll('.step-indicator');
+    const progressFill = toolWrapper.querySelector('#progress-fill');
 
     let currentStep = 1; 
 
     // Step 1
-    const priority1Options = document.querySelectorAll('input[name="firstPriority"]');
+    const priority1Options = toolWrapper.querySelectorAll('input[name="firstPriority"]');
     // Step 2
-    const priority2OptionsDiv = document.getElementById('priority2-options');
+    const priority2OptionsDiv = toolWrapper.querySelector('#priority2-options');
     // Step 3 
-    const ageInputs = document.querySelectorAll('input[name="propertyAge"]');
-    const conditionInputs = document.querySelectorAll('input[name="propertyCondition"]');
+    const ageInputs = toolWrapper.querySelectorAll('input[name="propertyAge"]');
+    const conditionInputs = toolWrapper.querySelectorAll('input[name="propertyCondition"]');
     // Step 4
-    const cityInput = document.getElementById('cityInput');
-    const propertyTypeSelect = document.getElementById('propertyTypeSelect');
-    const profileDisplay = document.getElementById('profile-display');
-    const propertyProfileHidden = document.getElementById('propertyProfileHidden');
+    const cityInput = toolWrapper.querySelector('#cityInput');
+    const propertyTypeSelect = toolWrapper.querySelector('#propertyTypeSelect');
+    const profileDisplay = toolWrapper.querySelector('#profile-display');
+    const propertyProfileHidden = toolWrapper.querySelector('#propertyProfileHidden');
     // Step 5
-    const googlePromptDisplay = document.getElementById('google-prompt-display');
-    const marketInputs = document.querySelectorAll('input[name="marketType"]');
+    const googlePromptDisplay = toolWrapper.querySelector('#google-prompt-display');
+    const marketInputs = toolWrapper.querySelectorAll('input[name="marketType"]');
 
     // --- Core Functions ---
 
@@ -526,8 +576,8 @@
 
     // LOGIC FUNCTION: Determines Buyer Profile based on Age/Condition
     function determinePropertyProfile() {
-        const age = document.querySelector('input[name="propertyAge"]:checked')?.value;
-        const condition = document.querySelector('input[name="propertyCondition"]:checked')?.value;
+        const age = toolWrapper.querySelector('input[name="propertyAge"]:checked')?.value;
+        const condition = toolWrapper.querySelector('input[name="propertyCondition"]:checked')?.value;
 
         if (!age || !condition) return;
 
@@ -558,12 +608,12 @@
     function isCurrentStepValid() {
         switch (currentStep) {
             case 1: 
-                return document.querySelector('input[name="firstPriority"]:checked') !== null;
+                return toolWrapper.querySelector('input[name="firstPriority"]:checked') !== null;
             case 2: 
-                return document.querySelector('input[name="secondPriority"]:checked') !== null;
+                return toolWrapper.querySelector('input[name="secondPriority"]:checked') !== null;
             case 3: 
-                const ageValid = document.querySelector('input[name="propertyAge"]:checked') !== null;
-                const conditionValid = document.querySelector('input[name="propertyCondition"]:checked') !== null;
+                const ageValid = toolWrapper.querySelector('input[name="propertyAge"]:checked') !== null;
+                const conditionValid = toolWrapper.querySelector('input[name="propertyCondition"]:checked') !== null;
                 return ageValid && conditionValid;
             case 4: 
                 const cityValid = cityInput.value.trim().length > 0;
@@ -571,7 +621,7 @@
                 const profileSet = propertyProfileHidden.value !== ""; 
                 return cityValid && typeValid && profileSet;
             case 5: 
-                return document.querySelector('input[name="marketType"]:checked') !== null;
+                return toolWrapper.querySelector('input[name="marketType"]:checked') !== null;
             default:
                 return false;
         }
@@ -594,7 +644,7 @@
         }
 
         if (currentStep === 2) {
-            const p1 = document.querySelector('input[name="firstPriority"]:checked')?.value;
+            const p1 = toolWrapper.querySelector('input[name="firstPriority"]:checked')?.value;
             if (p1) populatePriority2(p1);
         }
         if (currentStep === 4) {
@@ -607,7 +657,6 @@
 
         updateButtonStates();
         updateProgress();
-        window.scrollTo(0, 0); 
     }
 
     function populatePriority2(p1) {
@@ -628,7 +677,7 @@
             priority2OptionsDiv.appendChild(label);
         });
 
-        document.querySelectorAll('input[name="secondPriority"]').forEach(input => {
+        toolWrapper.querySelectorAll('input[name="secondPriority"]').forEach(input => {
             input.addEventListener('change', updateButtonStates);
         });
     }
@@ -667,13 +716,13 @@
         const strategyKey = recommendation.method;
         const recommendedMethod = SELLING_METHODS[strategyKey];
 
-        const p1LabelFull = document.querySelector('input[name="firstPriority"]:checked').nextElementSibling.textContent;
-        const p2LabelFull = document.querySelector('input[name="secondPriority"]:checked').nextElementSibling.textContent;
+        const p1LabelFull = toolWrapper.querySelector('input[name="firstPriority"]:checked').nextElementSibling.textContent;
+        const p2LabelFull = toolWrapper.querySelector('input[name="secondPriority"]:checked').nextElementSibling.textContent;
         const p1Label = p1LabelFull.split('(')[0].trim();
         const p2Label = p2LabelFull.split('(')[0].trim();
 
-        const age = document.querySelector('input[name="propertyAge"]:checked').nextElementSibling.textContent;
-        const condition = document.querySelector('input[name="propertyCondition"]:checked').nextElementSibling.textContent;
+        const age = toolWrapper.querySelector('input[name="propertyAge"]:checked').nextElementSibling.textContent;
+        const condition = toolWrapper.querySelector('input[name="propertyCondition"]:checked').nextElementSibling.textContent;
 
         let comparisonHTML = `
             <div style="background-color: #e8f0fe; padding: 25px; border-radius: 8px;">
@@ -685,44 +734,53 @@
                 <p style="font-size: 0.9em; margin-top: 10px;">Property Age: ${age} | Condition: ${condition}</p>
             </div>
 
-            <div class="recommended-method">
-                ✅ RECOMMENDED ACTION: **${recommendedMethod.name.toUpperCase()}**
-            </div>
-            
-            <h4 style="margin-top: 25px;">Reasoning for this Strategy:</h4>
-            <p>Based on your market, property, and priorities, this method gives you the **highest probability of success** by prioritizing your most critical goals (Speed, Price, or Convenience).</p>
-            
-            <div style="padding: 15px; border: 1px solid #c8dafc; border-radius: 8px; background-color: #f0f8ff;">
-                <h4 style="color: #00897b; margin-top: 0;">Benefits (Pros):</h4>
-                <ul class="pros-list" style="color: #00897b; list-style: square;">
-                    ${recommendedMethod.pros.map(pro => `<li>${pro}</li>`).join('')}
-                </ul>
-            </div>
-            
-            <div style="padding: 15px; border: 1px solid #fcc8c8; border-radius: 8px; background-color: #fff0f0; margin-top: 15px;">
-                <h4 style="color: #c00; margin-top: 0;">Trade-offs (Cons):</h4>
-                <ul class="pros-list" style="color: #c00; list-style: disc;">
-                    ${recommendedMethod.cons.map(con => `<li style="color: #c00;">${con}</li>`).join('')}
-                </ul>
-                <p style="font-size: 0.9em; margin-top: 10px; font-weight: bold; color: #c00;">**Key Tradeoff for You:** ${recommendation.tradeoff}</p>
+            <div class="method-card recommended">
+                <h3 style="color: #004d40; margin-top: 0; text-align: center;">✅ RECOMMENDED ACTION: **${recommendedMethod.name.toUpperCase()}**</h3>
+                
+                <div style="display: flex; gap: 20px; margin-top: 15px;">
+                    <div style="flex: 1;">
+                        <h4 style="color: #00897b; border-bottom: 2px solid #00897b;">Benefits (Pros):</h4>
+                        <ul class="pros-list" style="color: #00897b;">
+                            ${recommendedMethod.pros.map(pro => `<li>${pro}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div style="flex: 1;">
+                        <h4 style="color: #c00; border-bottom: 2px solid #c00;">Trade-offs (Cons):</h4>
+                        <ul class="cons-list" style="color: #c00;">
+                            ${recommendedMethod.cons.map(con => `<li style="color: #c00;">${con}</li>`).join('')}
+                        </ul>
+                        <p style="font-size: 0.9em; margin-top: 10px; font-weight: bold; color: #c00;">**Key Tradeoff for You:** ${recommendation.tradeoff}</p>
+                    </div>
+                </div>
             </div>
             
             <hr style="margin-top: 25px; margin-bottom: 25px;">
 
             <h4>Other Options: Can Be Done, But Not Optimal 🚫</h4>
-            <p>The methods below would likely force a compromise on your primary goals, especially in your current market and with your property type. Use caution if considering them.</p>
+            <p>The methods below would likely force a compromise on your primary goals in your current market. Review their drawbacks carefully.</p>
         `;
 
         for (const [key, method] of Object.entries(SELLING_METHODS)) {
             if (key !== strategyKey) {
                 comparisonHTML += `
-                    <div class="not-optimal-method">
-                        <h4 style="color: #e65100; margin-top: 0;">Option Not Recommended: **${method.name}**</h4>
-                        <p>This method carries **significant risk** to your most important priorities in your current situation. </p>
-                        <p style="font-weight: bold; margin-bottom: 5px;">Key Drawbacks (Cons):</p>
-                        <ul style="list-style: disc; margin-left: 20px; color: #a00;">
-                            ${method.cons.map(con => `<li>${con}</li>`).join('')}
-                        </ul>
+                    <div class="method-card alternative">
+                        <h4 style="color: #e65100; margin-top: 0;">Alternative Option: **${method.name}**</h4>
+                        <p style="font-weight: bold; margin-bottom: 10px;">This method carries **significant risk** to your **${p1Label}** goal.</p>
+                        
+                        <div style="display: flex; gap: 20px;">
+                            <div style="flex: 1;">
+                                <h5 style="color: #00897b; margin-top: 0; margin-bottom: 5px;">Potential Upside (Pros):</h5>
+                                <ul class="pros-list" style="font-size: 0.9em; color: #00897b;">
+                                    ${method.pros.map(pro => `<li>${pro}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div style="flex: 1;">
+                                <h5 style="color: #c00; margin-top: 0; margin-bottom: 5px;">Key Drawbacks (Cons):</h5>
+                                <ul class="cons-list" style="font-size: 0.9em; color: #c00;">
+                                    ${method.cons.map(con => `<li style="color: #c00;">${con}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 `;
             }
@@ -770,10 +828,10 @@
     findStrategyBtn.addEventListener('click', () => {
         if (!isCurrentStepValid()) return;
         
-        const marketType = document.querySelector('input[name="marketType"]:checked').value;
+        const marketType = toolWrapper.querySelector('input[name="marketType"]:checked').value;
         const propertyProfile = propertyProfileHidden.value; // Use the determined profile
-        const firstPriority = document.querySelector('input[name="firstPriority"]:checked').value;
-        const secondPriority = document.querySelector('input[name="secondPriority"]:checked').value;
+        const firstPriority = toolWrapper.querySelector('input[name="firstPriority"]:checked').value;
+        const secondPriority = toolWrapper.querySelector('input[name="secondPriority"]:checked').value;
         
         const key = `${firstPriority}-${secondPriority}-${marketType}-${propertyProfile}`;
         const rec = MARKET_SCENARIOS[key];
@@ -781,6 +839,7 @@
         if (!rec) {
             resultDiv.innerHTML = `<h3>Error: Could not find a specific scenario for your combination. (Key: ${key})</h3><p>Please try a different combination.</p>`;
             resultDiv.style.display = 'block';
+            toolWrapper.querySelector('#navigation-buttons').style.display = 'none';
             return;
         }
         
@@ -788,8 +847,8 @@
 
         resultDiv.innerHTML = finalHTML;
         resultDiv.style.display = 'block';
-        document.getElementById('input-form').style.display = 'none';
-        window.scrollTo(0, 0);
+        toolWrapper.querySelector('#input-form').style.display = 'none';
+        toolWrapper.querySelector('#navigation-buttons').style.display = 'none';
     });
 
     // Initialize the tool

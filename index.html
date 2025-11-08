@@ -259,7 +259,7 @@
     <div style="position: relative;">
         <div class="progress-line"><div id="progress-fill" class="progress-fill"></div></div>
         <div class="progress-container" id="progress-steps">
-            <div class="step-indicator active" data-step="1">1</div>
+            <div class="step-indicator" data-step="1">1</div>
             <div class="step-indicator" data-step="2">2</div>
             <div class="step-indicator" data-step="3">3</div>
             <div class="step-indicator" data-step="4">4</div>
@@ -277,12 +277,12 @@
                     <span>Speed (I need to sell quickly)</span>
                 </label>
                 <label>
-                    <input type="radio" name="firstPriority" value="price">
-                    <span>Price (I want maximum value/profit)</span>
-                </label>
-                <label>
                     <input type="radio" name="firstPriority" value="convenience">
                     <span>Convenience (I want a hassle-free, As-Is sale)</span>
+                </label>
+                <label>
+                    <input type="radio" name="firstPriority" value="price">
+                    <span>Price (I want maximum value/profit)</span>
                 </label>
             </div>
         </div>
@@ -612,10 +612,11 @@
 
     function populatePriority2(p1) {
         priority2OptionsDiv.innerHTML = '';
+        // UPDATED ORDER: Speed, Convenience, Price
         const priorities = [
             { id: 'speed', label: 'Speed (I need to sell quickly)' },
-            { id: 'price', label: 'Price (I want maximum value/profit)' },
-            { id: 'convenience', label: 'Convenience (I want a hassle-free, As-Is sale)' }
+            { id: 'convenience', label: 'Convenience (I want a hassle-free, As-Is sale)' },
+            { id: 'price', label: 'Price (I want maximum value/profit)' }
         ];
 
         priorities.filter(p => p.id !== p1).forEach(p => { 

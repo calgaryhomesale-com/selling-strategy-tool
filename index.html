@@ -692,10 +692,18 @@
             <p>Based on your market, property, and priorities, this method gives you the **highest probability of success** by prioritizing your most critical goals (Speed, Price, or Convenience).</p>
             
             <div style="padding: 15px; border: 1px solid #c8dafc; border-radius: 8px; background-color: #f0f8ff;">
-                <h4 style="color: #00897b; margin-top: 0;">Pros of Recommended Method:</h4>
+                <h4 style="color: #00897b; margin-top: 0;">Benefits (Pros):</h4>
                 <ul class="pros-list" style="color: #00897b; list-style: square;">
                     ${recommendedMethod.pros.map(pro => `<li>${pro}</li>`).join('')}
                 </ul>
+            </div>
+            
+            <div style="padding: 15px; border: 1px solid #fcc8c8; border-radius: 8px; background-color: #fff0f0; margin-top: 15px;">
+                <h4 style="color: #c00; margin-top: 0;">Trade-offs (Cons):</h4>
+                <ul class="pros-list" style="color: #c00; list-style: disc;">
+                    ${recommendedMethod.cons.map(con => `<li style="color: #c00;">${con}</li>`).join('')}
+                </ul>
+                <p style="font-size: 0.9em; margin-top: 10px; font-weight: bold; color: #c00;">**Key Tradeoff for You:** ${recommendation.tradeoff}</p>
             </div>
             
             <hr style="margin-top: 25px; margin-bottom: 25px;">
